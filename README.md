@@ -1,3 +1,5 @@
-# Neraca Bahan Makanan
+# Penyusunan Neraca Bahan Makanan
 
 Aplikasi ini adalah pengembangan dari aplikasi pencatatan neraca bahan makanan yang ada di bawah Badan Ketahanan Pangan (BKP), Kementerian Pertanian. 
+
+Penyusunan Neraca Bahan Makanan (NBM) merupakan salah kegiatan analisis ketersediaan pangan yang dimaksudkan untuk mengetahui data dan informasi tentang situasi dan keadaan ketersediaan bahan pangan untuk dikonsumsi penduduk dalam kurun waktu tertentu. Namun demikian pemahaman terhadap metodologi yang digunakan untuk penyusunan NBM stakeholder provinsi dan kabupaten masih rendah.  Masih rendahnya pemahaman terhadap metodologi salah satunya disebabkan oleh masih kompleksnya tabel excel sebagai alat bantu penyusunan NBM oleh stakeholders di provinsi dan kabupaten. Berangkat dari permasalahan tersebut maka proyek perubahan yang akan dilakukan adalah membangun aplikasi penyusunan NBM yang user friendly untuk mengotomatisasi penyusunan NBM dan informasi pendukungnya. Penggunaan aplikasi akan mendorong stakeholder untuk menghasilkan NBM yang sesuai dengan kondisi wilayah setempat; mengurangi frekuensi kunjungan ke pusat, dan mengurangi ketergantungan dengan pihak ketiga, sehingga penyusunan NBM menjadi lebih efektif dan efisien.

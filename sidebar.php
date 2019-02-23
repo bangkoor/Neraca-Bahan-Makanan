@@ -20,7 +20,7 @@
             </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="index.html">
+            <a class="nav-link" href="index.php">
               <i class="menu-icon mdi mdi-television"></i>
               <span class="menu-title">Dasbor</span>
             </a>

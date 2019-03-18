@@ -10,6 +10,8 @@
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/vendors/iconfonts/mdi/css/materialdesignicons.min.css">
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/vendors/css/vendor.bundle.base.css">
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/vendors/css/vendor.bundle.addons.css">
+  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/datatable/dataTables.bootstrap4.min.css">
   <!-- endinject -->
   <!-- plugin css for this page -->
   <!-- End plugin css for this page -->
@@ -17,4 +19,5 @@
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/style.css">
   <!-- endinject -->
   <link rel="shortcut icon" href="<?php echo base_url(); ?>assets/images/favicon.png" />
+
 </head>

@@ -16,5 +16,6 @@ function check_session_login()
   if ($session=='oke') {
     redirect ('dashboard');
   }
+
 }
 

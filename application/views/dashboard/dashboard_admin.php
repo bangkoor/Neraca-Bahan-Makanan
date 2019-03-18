@@ -94,16 +94,15 @@
               <div class="card card-weather">
                 <div class="card-body">
                   <div class="weather-date-location">
-                    <h3>Senin</h3>
-                    <p class="text-gray">
-                      <span class="weather-date">25 Februari, 2019</span>
+                    <p class="text-white">
+                      <span class="weather-date"><font size="5"><?php echo tanggal() ?></font></span>
                     </p>
                   </div>
                   <div class="weather-data d-flex">
                     <div class="mr-auto">
-                      <h4 class="display-3">Hallo! 
+                      <h4 class="display-3"><font color="white">Hallo! 
                         <p>
-                        Admin Cirebon
+                        Admin Cirebon</font>
                       </p>
                     </div>
                   </div>

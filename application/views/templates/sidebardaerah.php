@@ -5,7 +5,7 @@
             <div class="nav-link">
               <div class="user-wrapper">
                 <div class="profile-image">
-                  <img src="<?php echo base_url(); ?>assets/images/faces/face1.jpg" alt="profile image">
+                  <img src="<?php echo base_url(); ?>assets/images/faces/face1.png" alt="profile image">
                 </div>
                 <div class="text-wrapper">
                   <p class="profile-name"><?php echo ucfirst($this->session->userdata('lokasi')); ?></p>
@@ -15,9 +15,9 @@
                   </div>
                 </div>
               </div>
-              <button class="btn btn-success btn-block">Laporan Baru
+              <!-- <button class="btn btn-success btn-block">Laporan Baru
                 <i class="mdi mdi-plus"></i>
-              </button>
+              </button> -->
             </div>
           </li>
           <li class="nav-item <?php if($this->uri->segment(1) == "home"){echo "active"; } ?>">

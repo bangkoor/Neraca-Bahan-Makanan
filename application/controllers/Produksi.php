@@ -8,6 +8,7 @@ class Produksi extends CI_Controller
   {
     parent::__construct();
     check_session();
+    $this->load->model('Model_fields');
   }
 
   function index()
@@ -36,9 +37,10 @@ class Produksi extends CI_Controller
     }
     else{
     $data['title'] = 'Produksi Padi';
+    $data['fields'] = $this->Model_fields->padi();
     $this->load->view('templates/header',$data);
     $this->load->view('templates/topnav'); 
-    $this->template->load('templates','produksi/padi/index');
+    $this->template->load('templates','admin/produksi/padi/index');
     $this->load->view('templates/footer');
     }
     
@@ -54,9 +56,10 @@ class Produksi extends CI_Controller
     }
     else{
     $data['title'] = 'Produksi Berpati';
+    $data['fields'] = $this->Model_fields->berpati();
     $this->load->view('templates/header',$data);
     $this->load->view('templates/topnav'); 
-    $this->template->load('templates','produksi/berpati/index');
+    $this->template->load('templates','admin/produksi/berpati/index');
     $this->load->view('templates/footer');
     }
   }
@@ -71,9 +74,10 @@ class Produksi extends CI_Controller
     }
     else{
     $data['title'] = 'Produksi Gula';
+    $data['fields'] = $this->Model_fields->gula();
     $this->load->view('templates/header',$data);
     $this->load->view('templates/topnav'); 
-    $this->template->load('templates','produksi/gula/index');
+    $this->template->load('templates','admin/produksi/gula/index');
     $this->load->view('templates/footer');
     }
   }
@@ -88,9 +92,10 @@ class Produksi extends CI_Controller
     }
     else{
     $data['title'] = 'Produksi Biji';
+    $data['fields'] = $this->Model_fields->biji();
     $this->load->view('templates/header',$data);
     $this->load->view('templates/topnav'); 
-    $this->template->load('templates','produksi/biji/index');
+    $this->template->load('templates','admin/produksi/biji/index');
     $this->load->view('templates/footer');
     }
   }
@@ -105,9 +110,10 @@ class Produksi extends CI_Controller
     }
     else{
     $data['title'] = 'Produksi Buah';
+    $data['fields'] = $this->Model_fields->buah();
     $this->load->view('templates/header',$data);
     $this->load->view('templates/topnav'); 
-    $this->template->load('templates','produksi/buah/index');
+    $this->template->load('templates','admin/produksi/buah/index');
     $this->load->view('templates/footer');
     }
   }
@@ -122,9 +128,10 @@ class Produksi extends CI_Controller
     }
     else{
     $data['title'] = 'Produksi Sayur';
+    $data['fields'] = $this->Model_fields->sayur();
     $this->load->view('templates/header',$data);
     $this->load->view('templates/topnav'); 
-    $this->template->load('templates','produksi/sayur/index');
+    $this->template->load('templates','admin/produksi/sayur/index');
     $this->load->view('templates/footer');
     }
   }
@@ -139,9 +146,10 @@ class Produksi extends CI_Controller
     }
     else{
     $data['title'] = 'Produksi Daging';
+    $data['fields'] = $this->Model_fields->daging();
     $this->load->view('templates/header',$data);
     $this->load->view('templates/topnav'); 
-    $this->template->load('templates','produksi/daging/index');
+    $this->template->load('templates','admin/produksi/daging/index');
     $this->load->view('templates/footer');
     }
   }
@@ -156,9 +164,10 @@ class Produksi extends CI_Controller
     }
     else{
     $data['title'] = 'Produksi Telur';
+    $data['fields'] = $this->Model_fields->telur();
     $this->load->view('templates/header',$data);
     $this->load->view('templates/topnav'); 
-    $this->template->load('templates','produksi/telur/index');
+    $this->template->load('templates','admin/produksi/telur/index');
     $this->load->view('templates/footer');
     }
   }
@@ -173,9 +182,10 @@ class Produksi extends CI_Controller
     }
     else{
     $data['title'] = 'Produksi Susu';
+    $data['fields'] = $this->Model_fields->susu();
     $this->load->view('templates/header',$data);
     $this->load->view('templates/topnav'); 
-    $this->template->load('templates','produksi/susu/index');
+    $this->template->load('templates','admin/produksi/susu/index');
     $this->load->view('templates/footer');
     }
   }
@@ -190,9 +200,10 @@ class Produksi extends CI_Controller
     }
     else{
     $data['title'] = 'Produksi Ikan';
+    $data['fields'] = $this->Model_fields->ikan();
     $this->load->view('templates/header',$data);
     $this->load->view('templates/topnav'); 
-    $this->template->load('templates','produksi/ikan/index');
+    $this->template->load('templates','admin/produksi/ikan/index');
     $this->load->view('templates/footer');
     }
   }
@@ -204,9 +215,10 @@ class Produksi extends CI_Controller
     }
     else{
     $data['title'] = 'Produksi Minyak';
+    $data['fields'] = $this->Model_fields->minyak();
     $this->load->view('templates/header',$data);
     $this->load->view('templates/topnav'); 
-    $this->template->load('templates','produksi/minyak/index');
+    $this->template->load('templates','admin/produksi/minyak/index');
     $this->load->view('templates/footer');
     }
   }

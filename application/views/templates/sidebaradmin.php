@@ -5,7 +5,7 @@
             <div class="nav-link">
               <div class="user-wrapper">
                 <div class="profile-image">
-                  <img src="<?php echo base_url(); ?>assets/images/faces/logo-kab-bogor.jpg" alt="profile image">
+                  <img src="<?php echo base_url(); ?>assets/images/faces/face1.png" alt="profile image">
                 </div>
                 <div class="text-wrapper">
                   <p class="profile-name"><?php echo ucfirst($this->session->userdata('lokasi')); ?></p>
@@ -15,13 +15,21 @@
                   </div>
                 </div>
               </div>
-              
+              <!-- <button class="btn btn-success btn-block">Laporan Baru
+                <i class="mdi mdi-plus"></i>
+              </button> -->
             </div>
           </li>
           <li class="nav-item <?php if($this->uri->segment(1) == "home"){echo "active"; } ?>">
             <a class="nav-link" href="<?php echo base_url(); ?>dashboard">
               <i class="menu-icon mdi mdi-television"></i>
               <span class="menu-title">Dasbord</span>
+            </a>
+          </li>
+          <li class="nav-item <?php if($this->uri->segment(1) == "user"){echo "active"; } ?>">
+            <a class="nav-link" href="<?php echo base_url(); ?>user">
+              <i class="menu-icon mdi mdi-account"></i>
+              <span class="menu-title">User</span>
             </a>
           </li>
           <li class="nav-item <?php if($this->uri->segment(1) == "produksi"){echo "active"; } ?>">
@@ -33,37 +41,37 @@
             <div class="collapse" id="produksi">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item">
-                  <a class="nav-link" href="<?php echo base_url(); ?>produksi/padi">Padi-padian/<i>Cereals</i></a>
+                  <a class="nav-link" href="<?php echo base_url(); ?>admin/padi">Padi-padian/<i>Cereals</i></a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="<?php echo base_url(); ?>produksi/berpati">Makanan Berpati/<i>Starchy Foods</i></a>
+                  <a class="nav-link" href="<?php echo base_url(); ?>admin/berpati">Makanan Berpati/<i>Starchy Foods</i></a>
                 </li>
 				<li class="nav-item">
-                  <a class="nav-link" href="<?php echo base_url(); ?>produksi/gula">Gula/<i>Sugar</i></a>
+                  <a class="nav-link" href="<?php echo base_url(); ?>admin/gula">Gula/<i>Sugar</i></a>
                 </li>
 				<li class="nav-item">
-                  <a class="nav-link" href="<?php echo base_url(); ?>produksi/biji">Buah Biji Berminyak/<i>Pulses Nut & Oil Seeds</i></a>
+                  <a class="nav-link" href="<?php echo base_url(); ?>admin/biji">Buah Biji Berminyak/<i>Pulses Nut & Oil Seeds</i></a>
                 </li>
 				<li class="nav-item">
-                  <a class="nav-link" href="<?php echo base_url(); ?>produksi/buah">Buah-buahan/<i>Fruits</i></a>
+                  <a class="nav-link" href="<?php echo base_url(); ?>admin/buah">Buah-buahan/<i>Fruits</i></a>
                 </li>
 				<li class="nav-item">
-                  <a class="nav-link" href="<?php echo base_url(); ?>produksi/sayur">Sayur-sayuran/<i>Vegetables</i></a>
+                  <a class="nav-link" href="<?php echo base_url(); ?>admin/sayur">Sayur-sayuran/<i>Vegetables</i></a>
                 </li>
 				<li class="nav-item">
-                  <a class="nav-link" href="<?php echo base_url(); ?>produksi/daging">Daging/<i>Meat</i></a>
+                  <a class="nav-link" href="<?php echo base_url(); ?>admin/daging">Daging/<i>Meat</i></a>
                 </li>
 				<li class="nav-item">
-                  <a class="nav-link" href="<?php echo base_url(); ?>produksi/telur">Telur/<i>Eggs</i></a>
+                  <a class="nav-link" href="<?php echo base_url(); ?>admin/telur">Telur/<i>Eggs</i></a>
                 </li>
 				<li class="nav-item">
-                  <a class="nav-link" href="<?php echo base_url(); ?>produksi/susu">Susu/<i>Milk</i></a>
+                  <a class="nav-link" href="<?php echo base_url(); ?>admin/susu">Susu/<i>Milk</i></a>
                 </li>
 				<li class="nav-item">
-                  <a class="nav-link" href="<?php echo base_url(); ?>produksi/ikan">Ikan/<i>Fish</i></a>
+                  <a class="nav-link" href="<?php echo base_url(); ?>admin/ikan">Ikan/<i>Fish</i></a>
                 </li>
 				<li class="nav-item">
-                  <a class="nav-link" href="<?php echo base_url(); ?>produksi/minyak">Minyak & Lemak/<i>Oil & Fats</i></a>
+                  <a class="nav-link" href="<?php echo base_url(); ?>admin/minyak">Minyak & Lemak/<i>Oil & Fats</i></a>
                 </li>
               </ul>
             </div>

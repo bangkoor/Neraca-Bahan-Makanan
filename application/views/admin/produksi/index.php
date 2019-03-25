@@ -4,11 +4,11 @@
                   <h3><?php echo ucfirst($this->uri->segment(1)); ?></h3>
                   <div class="center">
                   <div class="btn-group btn-block center" role="group" aria-label="Basic example">
-                          <button type="button" class="btn btn-outline-secondary btn-block">Q 1</button>
+                          <button type="button" class="btn btn-danger btn-block"><big>2019</big><br/><small>(sangat sementara)</small></button>
                           <button type="button" class="btn btn-secondary disabled">></button>
-                          <button type="button" class="btn btn-secondary btn-block disabled">Q 2</button>
+                          <button type="button" class="btn btn-warning btn-block"><big>2018</big><br/><small>(sementara)</small></button>
                           <button type="button" class="btn btn-secondary disabled">></button>
-                          <button type="button" class="btn btn-secondary btn-block disabled">Q 3</button>
+                          <button type="button" class="btn btn-success btn-block"><big>2017</big><br/><small>(tetap)</small></button>
                    </div>
                	   </div>
                   <form class="form-sample">

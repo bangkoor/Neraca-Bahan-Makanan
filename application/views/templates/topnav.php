@@ -28,8 +28,12 @@
               <img class="img-xs rounded-circle" src="<?php echo base_url(); ?>assets/images/faces/face1.png" alt="Profile image">
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
-              <a class="dropdown-item" href="<?php echo base_url() ?>auth/logout">
-                Sign Out
+           
+			  <a class="dropdown-item" href="<?php echo base_url() ?>auth/logout">
+                Keluar
+              </a>
+			  <a class="dropdown-item" href="<?php echo base_url() ?>auth/logout">
+                Pengaturan
               </a>
             </div>
           </li>

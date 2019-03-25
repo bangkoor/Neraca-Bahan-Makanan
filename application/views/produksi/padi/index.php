@@ -7,11 +7,11 @@
                   </h4>
                   <div class="center">
                   <div class="btn-group btn-block center mt-2" role="group" aria-label="Basic example">
-                          <button type="button" class="btn btn-outline-secondary btn-block">Q 1</button>
+                          <button type="button" class="btn btn-outline-secondary btn-block">2019</button>
                           <button type="button" class="btn btn-secondary disabled">></button>
-                          <button type="button" class="btn btn-secondary btn-block disabled">Q 2</button>
+                          <button type="button" class="btn btn-secondary btn-block disabled">2018</button>
                           <button type="button" class="btn btn-secondary disabled">></button>
-                          <button type="button" class="btn btn-secondary btn-block disabled">Q 3</button>
+                          <button type="button" class="btn btn-secondary btn-block disabled">2017</button>
                    </div>
                	   </div>
                   <?php echo form_open(base_url().'produksi/padi','class="form-horizontal form-data"', array("id" => "form-data"));?>

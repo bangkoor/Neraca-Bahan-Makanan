@@ -34,7 +34,7 @@
             <a class="nav-link" data-toggle="collapse" href="#produksi" aria-expanded="false" aria-controls="ui-basic">
               <i class="menu-icon mdi mdi-factory"></i>
               <span class="menu-title">Produksi</span>
-              <i class="menu-arrow"></i><span class="badge badge-info">50%</span>
+              <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="produksi">
               <ul class="nav flex-column sub-menu">
@@ -79,7 +79,7 @@
             <a class="nav-link" data-toggle="collapse" href="#stok" aria-expanded="false" aria-controls="ui-basic">
               <i class="menu-icon mdi mdi-elevation-rise"></i>
               <span class="menu-title">Stok</span> 
-              <i class="menu-arrow"></i><span class="badge badge-info">34%</span>
+              <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="stok">
               <ul class="nav flex-column sub-menu">
@@ -123,7 +123,7 @@
             <a class="nav-link" data-toggle="collapse" href="#impor" aria-expanded="false" aria-controls="ui-basic">
               <i class="menu-icon mdi mdi-arrow-down-bold-circle"></i>
               <span class="menu-title">Impor</span> 
-              <i class="menu-arrow"></i><span class="badge badge-info">30%</span>
+              <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="impor">
               <ul class="nav flex-column sub-menu">
@@ -167,7 +167,7 @@
             <a class="nav-link" data-toggle="collapse" href="#ekspor" aria-expanded="false" aria-controls="ui-basic">
               <i class="menu-icon mdi mdi-arrow-up-bold-circle"></i>
               <span class="menu-title">Ekspor</span> 
-              <i class="menu-arrow"></i><span class="badge badge-info">20%</span>
+              <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="ekspor">
               <ul class="nav flex-column sub-menu">

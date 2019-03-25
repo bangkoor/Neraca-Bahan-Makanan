@@ -21,8 +21,7 @@
                     <tr>
                       <th>Nama Bahan Makanan</th>
                       <th>Produksi Kotor</th>
-                      <th>Konversi</th>
-                      <th>Produksi Bersih</th>
+                      <th>Konversi</th>                  
                    </tr>
                   </thead>
                   <tbody>
@@ -48,23 +47,13 @@
                       <div class="col-md-12">
                         <div class="form-group row">
                           <div class="col-sm-12">
-                            <input type="text" class="form-control" />
+                            <input type="text" class="form-control" <?php if($f->jenis != 'padi'){echo "disabled";}else{echo "";}?>/>
                           </div>
                         </div>
                       </div>
                     </div>
                     </td>
-                    <td width="25%">
-                      <div class="row">
-                      <div class="col-md-12">
-                        <div class="form-group row">
-                          <div class="col-sm-12">
-                            <input type="text" class="form-control" />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </td>
+                    
                   </td>
                 </tr>
                <?php endforeach;  ?>

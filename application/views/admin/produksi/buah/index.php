@@ -6,7 +6,7 @@
                       Jenis Bahan Makanan <?php echo ucfirst($this->uri->segment(2)); ?>
                   </h4>
                   <div class="center">
-                  <div class="btn-group btn-block center" role="group" aria-label="Basic example">
+                  <div class="btn-group btn-block center mt-2" role="group" aria-label="Basic example">
                           <button type="button" class="btn btn-danger btn-block"><big>2019</big><br/><small>(sangat sementara)</small></button>
                           <button type="button" class="btn btn-secondary disabled">></button>
                           <button type="button" class="btn btn-warning btn-block"><big>2018</big><br/><small>(sementara)</small></button>
@@ -14,15 +14,14 @@
                           <button type="button" class="btn btn-success btn-block"><big>2017</big><br/><small>(tetap)</small></button>
                    </div>
                	   </div>
-                  <?php echo form_open(base_url().'produksi/biji','class="form-horizontal form-data"', array("id" => "form-data"));?>
-                   <div class="table-responsive mt-4 mb-4">
+                  <?php echo form_open(base_url().'produksi/padi','class="form-horizontal form-data"', array("id" => "form-data"));?>
+                  <div class="table-responsive mt-4 mb-4">
                   <table class="table table-borderless" id="myTable" class="myTable">
                   <thead class=" thead-light">
                     <tr>
                       <th>Nama Bahan Makanan</th>
                       <th>Produksi Kotor</th>
-                      <th>Konversi</th>
-                      <th>Produksi Bersih</th>
+                      <th>Konversi</th>                  
                    </tr>
                   </thead>
                   <tbody>
@@ -48,23 +47,13 @@
                       <div class="col-md-12">
                         <div class="form-group row">
                           <div class="col-sm-12">
-                            <input type="text" class="form-control" />
+                            <input type="text" class="form-control" <?php if($f->jenis != 'padi'){echo "disabled";}else{echo "";}?>/>
                           </div>
                         </div>
                       </div>
                     </div>
                     </td>
-                    <td width="25%">
-                      <div class="row">
-                      <div class="col-md-12">
-                        <div class="form-group row">
-                          <div class="col-sm-12">
-                            <input type="text" class="form-control" />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </td>
+                    
                   </td>
                 </tr>
                <?php endforeach;  ?>

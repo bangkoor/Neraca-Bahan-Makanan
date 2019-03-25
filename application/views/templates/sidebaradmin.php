@@ -15,9 +15,7 @@
                   </div>
                 </div>
               </div>
-              <!-- <button class="btn btn-success btn-block">Laporan Baru
-                <i class="mdi mdi-plus"></i>
-              </button> -->
+        
             </div>
           </li>
           <li class="nav-item <?php if($this->uri->segment(1) == "home"){echo "active"; } ?>">

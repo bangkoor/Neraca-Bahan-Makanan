@@ -5,15 +5,32 @@
                   <h4>
                       Jenis Bahan Makanan <?php echo ucfirst($this->uri->segment(2)); ?>
                   </h4>
-                  <div class="center">
-                  <div class="btn-group btn-block center mt-2" role="group" aria-label="Basic example">
-                          <button type="button" class="btn btn-danger btn-block"><big>2019</big><br/><small>(sangat sementara)</small></button>
-                          <button type="button" class="btn btn-secondary disabled">></button>
-                          <button type="button" class="btn btn-warning btn-block"><big>2018</big><br/><small>(sementara)</small></button>
-                          <button type="button" class="btn btn-secondary disabled">></button>
-                          <button type="button" class="btn btn-success btn-block"><big>2017</big><br/><small>(tetap)</small></button>
-                   </div>
-               	   </div>
+                  <form class="forms-sample">
+                        <div class="form-group row">
+                          <label for="exampleInputEmail2" class="col-sm-3 col-form-label">Tahun</label>
+                          <div class="col-sm-9">
+                            <input type="text" class="form-control" id="exampleInputEmail2" placeholder="Masukkan tahun data">
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label for="exampleInputPassword2" class="col-sm-3 col-form-label">Jenis</label>
+                          <div class="col-sm-9">
+                            <select class="form-control">
+                              <option>Sangat Sementara</option>
+                              <option>Sementara</option>
+							  <option>Tetap</option>
+                            </select>
+                          </div>
+                        </div>
+						<div class="form-group row">
+                          <label for="exampleInputEmail2" class="col-sm-3 col-form-label">Penyusun</label>
+                          <div class="col-sm-9">
+                            <input type="text" class="form-control" id="exampleInputEmail2" placeholder="Masukkan instansi penyusun laporan">
+                          </div>
+                        </div>
+                        <button type="submit" class="btn btn-success mr-2">Muat Data</button>
+                        <button class="btn btn-light">Cancel</button>
+                      </form>
                   <?php echo form_open(base_url().'produksi/padi','class="form-horizontal form-data"', array("id" => "form-data"));?>
                   <div class="table-responsive mt-4 mb-4">
                   <table class="table table-borderless" id="myTable" class="myTable">

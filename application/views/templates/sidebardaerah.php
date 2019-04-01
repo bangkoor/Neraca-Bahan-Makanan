@@ -21,7 +21,7 @@
           <li class="nav-item <?php if($this->uri->segment(1) == "home"){echo "active"; } ?>">
             <a class="nav-link" href="<?php echo base_url(); ?>dashboard">
               <i class="menu-icon mdi mdi-television"></i>
-              <span class="menu-title">Dasbord</span>
+              <span class="menu-title">Dasbor</span>
             </a>
           </li>
           
@@ -202,10 +202,16 @@
               </ul>
             </div>
           </li>
-		  <li class="nav-item <?php if($this->uri->segment(1) == "benih"){echo "active"; } ?>">
+		  		  <li class="nav-item <?php if($this->uri->segment(1) == "benih"){echo "active"; } ?>">
             <a class="nav-link" href="<?php echo base_url(); ?>#benih">
               <i class="menu-icon mdi mdi-leaf"></i>
               <span class="menu-title">Benih</span>
+            </a>
+          </li>
+		  <li class="nav-item <?php if($this->uri->segment(1) == "industri"){echo "active"; } ?>">
+            <a class="nav-link" href="<?php echo base_url(); ?>#industri">
+              <i class="menu-icon mdi mdi-factory"></i>
+              <span class="menu-title">Industri Makanan</span>
             </a>
           </li>
 		  <li class="nav-item <?php if($this->uri->segment(1) == "konsumsi"){echo "active"; } ?>">

@@ -21,15 +21,10 @@
           <li class="nav-item <?php if($this->uri->segment(1) == "home"){echo "active"; } ?>">
             <a class="nav-link" href="<?php echo base_url(); ?>dashboard">
               <i class="menu-icon mdi mdi-television"></i>
-              <span class="menu-title">Dasbord</span>
+              <span class="menu-title">Dasbor</span>
             </a>
           </li>
-          <li class="nav-item <?php if($this->uri->segment(1) == "user"){echo "active"; } ?>">
-            <a class="nav-link" href="<?php echo base_url(); ?>user">
-              <i class="menu-icon mdi mdi-account"></i>
-              <span class="menu-title">User</span>
-            </a>
-          </li>
+          
           <li class="nav-item <?php if($this->uri->segment(1) == "produksi"){echo "active"; } ?>">
             <a class="nav-link" data-toggle="collapse" href="#produksi" aria-expanded="false" aria-controls="ui-basic">
               <i class="menu-icon mdi mdi-factory"></i>
@@ -207,11 +202,30 @@
               </ul>
             </div>
           </li>
-		  <li class="nav-item">
-            <a class="nav-link" href="../../pages/tables/basic-table.html">
-              <i class="menu-icon mdi mdi-settings"></i>
-              <span class="menu-title">Pengaturan</span>
+		  		  <li class="nav-item <?php if($this->uri->segment(1) == "benih"){echo "active"; } ?>">
+            <a class="nav-link" href="<?php echo base_url(); ?>#benih">
+              <i class="menu-icon mdi mdi-leaf"></i>
+              <span class="menu-title">Benih</span>
             </a>
+          </li>
+		  <li class="nav-item <?php if($this->uri->segment(1) == "industri"){echo "active"; } ?>">
+            <a class="nav-link" href="<?php echo base_url(); ?>#industri">
+              <i class="menu-icon mdi mdi-factory"></i>
+              <span class="menu-title">Industri Makanan</span>
+            </a>
+          </li>
+		  <li class="nav-item <?php if($this->uri->segment(1) == "konsumsi"){echo "active"; } ?>">
+            <a class="nav-link" href="<?php echo base_url(); ?>#konsumsi">
+              <i class="menu-icon mdi mdi-food-fork-drink"></i>
+              <span class="menu-title">Konsumsi</span>
+            </a>
+          </li>
+		  <li class="nav-item nav-profile">
+            <div class="nav-link">
+              <button class="btn btn-success btn-block">Proses
+                <i class="mdi mdi-flask-empty"></i>
+              </button>
+            </div>
           </li>
         </ul>
       </nav>

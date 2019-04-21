@@ -214,7 +214,7 @@
           </li>
            <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#industrial" aria-expanded="false" aria-controls="industrial">
-              <i class="menu-icon mdi mdi-arrow-up-bold-circle"></i>
+              <i class="menu-icon mdi mdi-factory"></i>
               <span class="menu-title">Industrial</span> 
               <i class="menu-arrow"></i>
             </a>
@@ -256,6 +256,50 @@
               </ul>
             </div>
           </li>
+		  <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#konsumsi" aria-expanded="false" aria-controls="konsumsi">
+              <i class="menu-icon mdi mdi-food"></i>
+              <span class="menu-title">Konsumsi</span> 
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="konsumsi">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item">
+                  <a class="nav-link" href="<?php echo base_url(); ?>admin/konsumsi_padi">Padi-padian/<i>Cereals</i></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="<?php echo base_url(); ?>admin/konsumsi_berpati">Makanan Berpati/<i>Starchy Foods</i></a>
+                </li>
+        <li class="nav-item">
+                  <a class="nav-link" href="<?php echo base_url(); ?>admin/konsumsi_gula">Gula/<i>Sugar</i></a>
+                </li>
+        <li class="nav-item">
+                  <a class="nav-link" href="<?php echo base_url(); ?>admin/konsumsi_biji">Buah Biji Berminyak/<i>Pulses Nut & Oil Seeds</i></a>
+                </li>
+        <li class="nav-item">
+                  <a class="nav-link" href="<?php echo base_url(); ?>admin/konsumsi_buah">Buah-buahan/<i>Fruits</i></a>
+                </li>
+        <li class="nav-item">
+                  <a class="nav-link" href="<?php echo base_url(); ?>admin/konsumsi_sayur">Sayur-sayuran/<i>Vegetables</i></a>
+                </li>
+        <li class="nav-item">
+                  <a class="nav-link" href="<?php echo base_url(); ?>admin/konsumsi_daging">Daging/<i>Meat</i></a>
+                </li>
+        <li class="nav-item">
+                  <a class="nav-link" href="<?php echo base_url(); ?>admin/konsumsi_telur">Telur/<i>Eggs</i></a>
+                </li>
+        <li class="nav-item">
+                  <a class="nav-link" href="<?php echo base_url(); ?>admin/konsumsi_susu">Susu/<i>Milk</i></a>
+                </li>
+        <li class="nav-item">
+                  <a class="nav-link" href="<?php echo base_url(); ?>admin/konsumsi_ikan">Ikan/<i>Fish</i></a>
+                </li>
+        <li class="nav-item">
+                  <a class="nav-link" href="<?php echo base_url(); ?>admin/konsumsi_minyak">Minyak & Lemak/<i>Oil & Fats</i></a>
+                </li>
+              </ul>
+            </div>
+          </li>
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#laporan" aria-expanded="false" aria-controls="laporan">
               <i class="menu-icon mdi mdi-file-document"></i>
@@ -269,6 +313,9 @@
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="<?php echo base_url(); ?>admin/laporan_pph">PPH</a>
+                </li>
+				<li class="nav-item">
+                  <a class="nav-link" href="<?php echo base_url(); ?>admin/laporan_neraca_pangan">Neraca Pangan</a>
                 </li>
               </ul>
             </div>

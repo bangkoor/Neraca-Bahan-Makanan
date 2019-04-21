@@ -17,8 +17,8 @@
                       <th>No</th>
                       <th>Bahan Makanan</th>
                       <th>Angka Ekspor</th>
-                      <th>Konversi</th>
-                      <th>Produksi Bersih</th>
+                      <th>Extraction Rate</th>
+                      <th>Equivalent Primary Commodity<br>(000 Ton)</th>
                       <th>Tahun</th>
                       <th>Quartal</th>
                       <th>Status</th>

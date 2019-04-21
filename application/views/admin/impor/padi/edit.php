@@ -33,7 +33,7 @@
                       <input type="text" class="form-control" id="angka_impor" name="angka_impor" value="<?= $record['angka_impor']; ?>">
                     </div>
                     <div class="form-group">
-                      <label for="exampleInputEmail3">Konversi</label>
+                      <label for="exampleInputEmail3">Extraction Rate</label>
                       <input type="text" class="form-control" id="konversi" name="konversi" value="<?= $record['konversi']; ?>">
                     </div>
                     <button type="submit" name="submit" class="btn btn-success mr-2">Submit</button>

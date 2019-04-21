@@ -5,7 +5,7 @@
                   <h4>
                       Neraca Bahan Makanan
                   </h4>
-                   <?php echo form_open(base_url().'admin/nbm','class="form-horizontal form-data"', array("id" => "form-data"));?>
+                   <?php echo form_open(base_url().'admin/laporan_nbm_cetak','class="form-horizontal form-data"', array("id" => "form-data"));?>
                    <div class="row">
                      <div class="col-md-4">
                        <div class="form-group mt-3">
@@ -42,6 +42,7 @@
                    </div>
                    <center>
                     <button type="submit" name="submit" class="btn btn-success btn-fw">Cetak Laporan</button>
+                    <button type="pdf" name="pdf" class="btn btn-danger btn-fw">PDF</button>
                   </center>
                   </form>
                 </div>

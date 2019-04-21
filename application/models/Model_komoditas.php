@@ -35,8 +35,14 @@ function get_id_produksi($id)
 
 function input_padi()
   {
-     $param = array('jenis'=>'padi');
-    return $this->db->get_where('komoditas',$param);
+     $query = "SELECT komoditas.*, konversi.* FROM konversi INNER JOIN komoditas ON komoditas.id_komoditas = konversi.id_komoditas WHERE jenis = 'padi' AND turunan = 0 GROUP BY komoditas.id_komoditas ";
+    return $this->db->query($query);
+  }
+
+  function input_padi_stok()
+  {
+     $query = "SELECT komoditas.*, konversi.* FROM konversi INNER JOIN komoditas ON komoditas.id_komoditas = konversi.id_komoditas WHERE jenis = 'padi' GROUP BY komoditas.id_komoditas ";
+    return $this->db->query($query);
   }
 
   function produksi_padi()
@@ -709,6 +715,281 @@ ORDER BY ekspor.id_ekspor ASC
   {
     $this->db->where('id_ekspor', $id);
     $this->db->delete('ekspor');
+  }
+
+
+function industrial_padi()
+  {
+     $query = "SELECT industrial.id_industrial, industrial.konversi, komoditas.id_komoditas, komoditas.nama_komoditas, komoditas.nama_inggris, industrial.angka_industrial, industrial.quartal, industrial.status, industrial.tahun
+FROM komoditas
+INNER JOIN industrial on komoditas.id_komoditas = industrial.id_komoditas
+WHERE komoditas.jenis = 'padi'
+ORDER BY industrial.id_industrial ASC
+              ";
+
+    return $this->db->query($query);
+  }
+
+  function industrial_berpati()
+  {
+     $query = "SELECT industrial.id_industrial, industrial.konversi, komoditas.id_komoditas, komoditas.nama_komoditas, komoditas.nama_inggris, industrial.angka_industrial, industrial.quartal, industrial.status, industrial.tahun
+FROM komoditas
+INNER JOIN industrial on komoditas.id_komoditas = industrial.id_komoditas
+WHERE komoditas.jenis = 'berpati'
+ORDER BY industrial.id_industrial ASC
+              ";
+
+    return $this->db->query($query);
+  }
+
+  function industrial_gula()
+  {
+     $query = "SELECT industrial.id_industrial, industrial.konversi, komoditas.id_komoditas, komoditas.nama_komoditas, komoditas.nama_inggris, industrial.angka_industrial, industrial.quartal, industrial.status, industrial.tahun
+FROM komoditas
+INNER JOIN industrial on komoditas.id_komoditas = industrial.id_komoditas
+WHERE komoditas.jenis = 'gula'
+ORDER BY industrial.id_industrial ASC
+              ";
+
+    return $this->db->query($query);
+  }
+
+  function industrial_biji()
+  {
+     $query = "SELECT industrial.id_industrial, industrial.konversi, komoditas.id_komoditas, komoditas.nama_komoditas, komoditas.nama_inggris, industrial.angka_industrial, industrial.quartal, industrial.status, industrial.tahun
+FROM komoditas
+INNER JOIN industrial on komoditas.id_komoditas = industrial.id_komoditas
+WHERE komoditas.jenis = 'biji'
+ORDER BY industrial.id_industrial ASC
+              ";
+
+    return $this->db->query($query);
+  }
+
+  function industrial_buah()
+  {
+     $query = "SELECT industrial.id_industrial, industrial.konversi, komoditas.id_komoditas, komoditas.nama_komoditas, komoditas.nama_inggris, industrial.angka_industrial, industrial.quartal, industrial.status, industrial.tahun
+FROM komoditas
+INNER JOIN industrial on komoditas.id_komoditas = industrial.id_komoditas
+WHERE komoditas.jenis = 'buah'
+ORDER BY industrial.id_industrial ASC
+              ";
+
+    return $this->db->query($query);
+  }
+
+  function industrial_sayur()
+  {
+     $query = "SELECT industrial.id_industrial, industrial.konversi, komoditas.id_komoditas, komoditas.nama_komoditas, komoditas.nama_inggris, industrial.angka_industrial, industrial.quartal, industrial.status, industrial.tahun
+FROM komoditas
+INNER JOIN industrial on komoditas.id_komoditas = industrial.id_komoditas
+WHERE komoditas.jenis = 'sayur'
+ORDER BY industrial.id_industrial ASC
+              ";
+
+    return $this->db->query($query);
+  }
+
+  function industrial_daging()
+  {
+     $query = "SELECT industrial.id_industrial, industrial.konversi, komoditas.id_komoditas, komoditas.nama_komoditas, komoditas.nama_inggris, industrial.angka_industrial, industrial.quartal, industrial.status, industrial.tahun
+FROM komoditas
+INNER JOIN industrial on komoditas.id_komoditas = industrial.id_komoditas
+WHERE komoditas.jenis = 'daging'
+ORDER BY industrial.id_industrial ASC
+              ";
+
+    return $this->db->query($query);
+  }
+
+  function industrial_telur()
+  {
+     $query = "SELECT industrial.id_industrial, industrial.konversi, komoditas.id_komoditas, komoditas.nama_komoditas, komoditas.nama_inggris, industrial.angka_industrial, industrial.quartal, industrial.status, industrial.tahun
+FROM komoditas
+INNER JOIN industrial on komoditas.id_komoditas = industrial.id_komoditas
+WHERE komoditas.jenis = 'telur'
+ORDER BY industrial.id_industrial ASC
+              ";
+
+    return $this->db->query($query);
+  }
+
+  function industrial_susu()
+  {
+     $query = "SELECT industrial.id_industrial, industrial.konversi, komoditas.id_komoditas, komoditas.nama_komoditas, komoditas.nama_inggris, industrial.angka_industrial, industrial.quartal, industrial.status, industrial.tahun
+FROM komoditas
+INNER JOIN industrial on komoditas.id_komoditas = industrial.id_komoditas
+WHERE komoditas.jenis = 'susu'
+ORDER BY industrial.id_industrial ASC
+              ";
+
+    return $this->db->query($query);
+  }
+
+  function industrial_ikan()
+  {
+     $query = "SELECT industrial.id_industrial, industrial.konversi, komoditas.id_komoditas, komoditas.nama_komoditas, komoditas.nama_inggris, industrial.angka_industrial, industrial.quartal, industrial.status, industrial.tahun
+FROM komoditas
+INNER JOIN industrial on komoditas.id_komoditas = industrial.id_komoditas
+WHERE komoditas.jenis = 'ikan'
+ORDER BY industrial.id_industrial ASC
+              ";
+
+    return $this->db->query($query);
+  }
+
+  function industrial_minyak()
+  {
+     $query = "SELECT industrial.id_industrial, industrial.konversi, komoditas.id_komoditas, komoditas.nama_komoditas, komoditas.nama_inggris, industrial.angka_industrial, industrial.quartal, industrial.status, industrial.tahun
+FROM komoditas
+INNER JOIN industrial on komoditas.id_komoditas = industrial.id_komoditas
+WHERE komoditas.jenis = 'minyak'
+ORDER BY industrial.id_industrial ASC
+              ";
+
+    return $this->db->query($query);
+  }
+
+  function edit_industrial()
+  {
+  $data = array('angka_industrial' => $this->input->post('angka_industrial'),
+                'konversi' => $this->input->post('konversi'));
+
+    $this->db->where('id_industrial', $this->input->post('id_industrial'));
+    $this->db->update('industrial',$data);
+
+  }
+
+  function get_id_industrial($id)
+  {
+    $param = array('id_industrial'=>$id);
+    return $this->db->get_where('industrial',$param);
+  }
+
+  function input_industrial($data){
+    return $this->db->insert_batch('industrial', $data);
+  }
+
+  function hapus_industrial($id)
+  {
+    $this->db->where('id_industrial', $id);
+    $this->db->delete('industrial');
+  }
+
+  function nbm_tabel($tahun,$quartal,$status)
+  {
+     $query = "SELECT komoditas.id_komoditas, komoditas.nama_komoditas, komoditas.nama_inggris, komoditas.turunan, produksi.id_produksi, produksi.produksi_kotor, produksi.konversi AS konversi_produksi, produksi.quartal, produksi.status, produksi.tahun, stok.id_stok, stok.stok_awal, stok.stok_akhir, stok.konversi AS konversi_stok, impor.id_impor, impor.angka_impor, impor.konversi AS konversi_impor, impor.penyediaan_sblm, ekspor.id_ekspor, ekspor.angka_ekspor, ekspor.konversi AS konversi_ekspor, ekspor.penyediaan,industrial.id_industrial, industrial.angka_industrial, industrial.konversi AS konversi_industrial, konversi.* FROM komoditas
+LEFT JOIN produksi ON produksi.id_komoditas  = komoditas.id_komoditas
+LEFT JOIN stok ON stok.id_komoditas  = komoditas.id_komoditas
+LEFT JOIN impor ON impor.id_komoditas = komoditas.id_komoditas
+LEFT JOIN ekspor ON ekspor.id_komoditas = komoditas.id_komoditas
+LEFT JOIN industrial ON industrial.id_komoditas = komoditas.id_komoditas
+LEFT JOIN konversi ON konversi.id_komoditas = komoditas.id_komoditas
+WHERE industrial.quartal = '$quartal' AND industrial.status = '$status' AND industrial.tahun = $tahun
+              ";
+
+    return $this->db->query($query);
+  }
+  function proses_impor(){
+  $query = "SELECT (produksi.produksi_kotor*produksi.konversi/1000) - (stok.stok_akhir-stok.stok_awal) + (impor.angka_impor*impor.konversi/1000) AS penyediaan_dalam_negri_sblm, komoditas.id_komoditas FROM komoditas
+INNER JOIN produksi ON produksi.id_komoditas = komoditas.id_komoditas
+INNER JOIN stok ON stok.id_komoditas = komoditas.id_komoditas
+INNER JOIN impor ON impor.id_komoditas = komoditas.id_komoditas
+  ";
+
+  }
+
+  function fetch_single_details($tahun,$status,$quartal)
+  {
+    $query = "SELECT komoditas.id_komoditas, komoditas.nama_komoditas, komoditas.nama_inggris, komoditas.turunan, produksi.id_produksi, produksi.produksi_kotor, produksi.konversi AS konversi_produksi, produksi.quartal, produksi.status, produksi.tahun, stok.id_stok, stok.stok_awal, stok.stok_akhir, stok.konversi AS konversi_stok, impor.id_impor, impor.angka_impor, impor.konversi AS konversi_impor, impor.penyediaan_sblm, ekspor.id_ekspor, ekspor.angka_ekspor, ekspor.konversi AS konversi_ekspor, ekspor.penyediaan,industrial.id_industrial, industrial.angka_industrial, industrial.konversi AS konversi_industrial, konversi.* FROM komoditas
+LEFT JOIN produksi ON produksi.id_komoditas  = komoditas.id_komoditas
+LEFT JOIN stok ON stok.id_komoditas  = komoditas.id_komoditas
+LEFT JOIN impor ON impor.id_komoditas = komoditas.id_komoditas
+LEFT JOIN ekspor ON ekspor.id_komoditas = komoditas.id_komoditas
+LEFT JOIN industrial ON industrial.id_komoditas = komoditas.id_komoditas
+LEFT JOIN konversi ON konversi.id_komoditas = komoditas.id_komoditas
+WHERE industrial.quartal = '$quartal' AND industrial.status = '$status' AND industrial.tahun = $tahun
+              ";
+
+    $data = $this->db->query($query);
+    $output = '<table width="100%" cellspacing="5" cellpadding="5">
+                    <tr>
+                      <th>No</th>
+                      <th>Bahan Makanan</th>
+                      <th>Produksi Masukan</th>
+                      <th>Produksi Keluaran</th>
+                      <th>Perubahan Stok</th>
+                      <th>Impor</th>
+                      <th>Penyediaan Dalam Negri<br>Sebelum Ekspor</th>
+                      <th>Ekspor</th>
+                      <th>Penyediaan Dalam Negri</th>
+                      <th>Pakan</th>
+                      <th>Bibit</th>
+                      <th>Diolah Untuk Makanan</th>
+                      <th>Diolah Bukan Makanan</th>
+                      <th>Tercecer</th>
+                      <th>Bahan Makanan</th>
+                      <th>Kg/Th</th>
+                      <th>Gram/hari</th>
+                      <th>Kalori<br>kkal/hari</th>
+                      <th>Protein<br>gram/hari</th>
+                      <th>Lemak/<br>gram/hari</th>
+                   </tr>
+                  </thead>
+                  <tbody>
+    ';
+    $no = 1;
+    foreach($data->result() as $f)
+    {
+    $pakan = ($f->penyediaan*$f->kon_pakan)/100;
+              $bibit = ($f->penyediaan*$f->kon_bibit)/100;
+              $makanan = ($f->penyediaan*$f->kon_makanan)/100;
+              $industrial = ($f->angka_industrial*$f->konversi_industrial)/1000;
+              $tercecer = ($f->penyediaan*$f->kon_tercecer)/100;
+              $bahan_makanan = $f->penyediaan - $pakan - $bibit - $makanan - $industrial - $tercecer;
+              $kg_th = $bahan_makanan/264161.6*1000;
+              $gram_hari = $kg_th/365*1000;
+              $kalori = $gram_hari/100*$f->bdd/100*$f->kalori;
+              $protein = $gram_hari/100*$f->bdd/100*$f->protein;
+              $lemak = $gram_hari/100*$f->bdd/100*$f->lemak;
+              $masukan = $f->turunan==0?'$f->produksi_kotor*$f->konversi_produksi/1000':'0';
+              $keluaran = $f->turunan==1?'$f->produksi_kotor*$f->konversi_produksi/1000':'0';
+              $stok = ($f->stok_akhir - $f->stok_awal ) * $f->konversi_stok / 1000;
+              $impor = $f->angka_impor*$f->konversi_impor/1000;
+              $ekspor = $f->angka_ekspor*$f->konversi_ekspor/1000;
+
+      $output .= '<tr>
+                  <td>'.$no.'</td>
+                  <td>'.$f->nama_komoditas.'<br><i>'.$f->nama_inggris.'</i></td>
+                  <td>'.$masukan.'</td>
+                  <td>'.$keluaran.'</td>
+                  <td>'.$stok.'</td>
+                  <td>'.$impor.'</td>
+                  <td>'.$f->penyediaan_sblm.'</td>
+                  <td>'.$ekspor.'</td>
+                  <td>'.$f->penyediaan.'</td>
+                  <td>'.$pakan.'</td>
+                  <td>'.$bibit.'</td>
+                  <td>'.$makanan.'</td>
+                  <td>'.$industrial.'</td>
+                  <td>'.$tercecer.'</td>
+                  <td>'.$bahan_makanan.'</td>
+                  <td>'.$kg_th.'</td>
+                  <td>'.$gram_hari.'</td>
+                  <td>'.$kalori.'</td>
+                  <td>'.$protein.'</td>
+                  <td>'.$lemak.'</td>
+                </tr>
+      ';
+    }
+    $output .= '
+    <tr>
+      <td colspan="2" align="center"><a href="'.base_url().'admin/laporan_nbm" class="btn btn-primary">Back</a></td>
+    </tr>
+    </tbody>
+    ';
+    $output .= '</table>';
+    return $output;
   }
   
 }

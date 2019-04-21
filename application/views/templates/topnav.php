@@ -10,17 +10,7 @@
         </a>
       </div>
       <div class="navbar-menu-wrapper d-flex align-items-center">
-        <ul class="navbar-nav navbar-nav-left header-links d-none d-md-flex">
-          <li class="nav-item">
-            <a href="#" class="nav-link">Jadwal
-              <span class="badge badge-primary ml-1">New</span>
-            </a>
-          </li>
-          <li class="nav-item active">
-            <a href="#" class="nav-link">
-              <i class="mdi mdi-elevation-rise"></i>Daftar Laporan</a>
-          </li>
-        </ul>
+        
         <ul class="navbar-nav navbar-nav-right">
           <li class="nav-item dropdown d-none d-xl-inline-block">
             <a class="nav-link dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown" aria-expanded="false">

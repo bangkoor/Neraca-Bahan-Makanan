@@ -47,7 +47,7 @@
                       <th width="1%">No</th>
                       <th>Nama Bahan Makanan</th>
                       <th>Angka Impor</th>
-                      <th>Konversi</th>
+                      <th>Extraction Rate</th>
                    </tr>
                   </thead>
                   <tbody>

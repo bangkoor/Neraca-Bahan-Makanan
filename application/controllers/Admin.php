@@ -31,11 +31,56 @@ class Admin extends CI_Controller
   function laporan_nbm()
   {
     $data['title'] = 'Laporan NBM';
-    $data['fields'] = $this->Model_komoditas->produksi_padi();
     $this->load->view('templates/header',$data);
     $this->load->view('templates/topnav'); 
     $this->template->load('templates','admin/laporan/nbm');
     $this->load->view('templates/footer');
+  }
+
+  function laporan_nbm_cetak()
+  {
+    if (isset($_POST['submit'])) {
+
+    $tahun = $_POST['tahun'];
+    $quartal = $_POST['quartal'];
+    $status = $_POST['status'];
+
+    $data['title'] = 'Laporan NBM';
+    $data['nbm'] = $this->Model_komoditas->nbm_tabel($tahun,$quartal,$status)->result();
+	$data['tahun'] = $tahun;
+	$data['quartal'] = $quartal;
+	$data['status'] = $status;
+	
+    
+    $this->load->view('templates/header',$data);
+    $this->load->view('templates/topnav'); 
+    $this->template->load('templates','admin/laporan/nbm_cetak');
+    $this->load->view('templates/footer');
+  }
+  elseif (isset($_POST['pdf'])) {
+
+    $tahun = $_POST['tahun'];
+    $quartal = $_POST['quartal'];
+    $status = $_POST['status'];
+    $query = "SELECT komoditas.id_komoditas, komoditas.nama_komoditas, komoditas.nama_inggris, komoditas.turunan, produksi.id_produksi, produksi.produksi_kotor, produksi.konversi AS konversi_produksi, produksi.quartal, produksi.status, produksi.tahun, stok.id_stok, stok.stok_awal, stok.stok_akhir, stok.konversi AS konversi_stok, impor.id_impor, impor.angka_impor, impor.konversi AS konversi_impor, impor.penyediaan_sblm, ekspor.id_ekspor, ekspor.angka_ekspor, ekspor.konversi AS konversi_ekspor, ekspor.penyediaan,industrial.id_industrial, industrial.angka_industrial, industrial.konversi AS konversi_industrial, konversi.* FROM komoditas
+LEFT JOIN produksi ON produksi.id_komoditas  = komoditas.id_komoditas
+LEFT JOIN stok ON stok.id_komoditas  = komoditas.id_komoditas
+LEFT JOIN impor ON impor.id_komoditas = komoditas.id_komoditas
+LEFT JOIN ekspor ON ekspor.id_komoditas = komoditas.id_komoditas
+LEFT JOIN industrial ON industrial.id_komoditas = komoditas.id_komoditas
+LEFT JOIN konversi ON konversi.id_komoditas = komoditas.id_komoditas
+WHERE industrial.quartal = '$quartal' AND industrial.status = '$status' AND industrial.tahun = $tahun
+              ";
+             $laporan = $this->db->query($query);
+    $data['nbm'] = $laporan->result();
+    $data['tahun'] = $tahun;
+    $data['quartal'] = $quartal;
+    $data['status'] = $status;
+
+    $this->mypdf->setPaper('A4','landscape');
+    $this->mypdf->filename = 'laporan_nbm.pdf';
+    $this->mypdf->load_view('admin/laporan/nbm_cetak',$data);
+}
   }
 
   function laporan_pph()
@@ -80,7 +125,33 @@ function padi_post_produksi()
     redirect('admin/produksi_padi');
     }
     elseif (isset($_POST['next'])) {
-    redirect('admin/produksi_berpati');
+              $id_komoditas = $_POST['id_komoditas'];
+        $produksi_kotor = $_POST['produksi_kotor']; // Ambil data telp dan masukkan ke variabel telp
+        $luas_panen = $_POST['luas_panen']; // Ambil data alamat dan masukkan ke variabel alamat
+        $konversi = $_POST['konversi'];
+        $tahun = $_POST['tahun']; // Ambil data alamat dan masukkan ke variabel alamat
+        $quartal = $_POST['quartal']; // Ambil data alamat dan masukkan ke variabel alamat
+        $status = $_POST['status']; // Ambil data alamat dan masukkan ke variabel alamat
+        $komoditas = $_POST['komoditas'];
+        $data = array();
+    
+    $index = 0; // Set index array awal dengan 0
+    foreach($id_komoditas as $datakomoditas){ // Kita buat perulangan berdasarkan nis sampai data terakhir
+      array_push($data, array(
+        'id_komoditas'=>$datakomoditas,
+        'produksi_kotor'=>$produksi_kotor[$index],
+        'luas_panen'=>$luas_panen[$index], 
+        'konversi'=>$konversi[$index], 
+        'tahun'=>$tahun, 
+        'quartal'=>$quartal, 
+        'status'=>$status,  // Ambil dan set data nama sesuai index array dari $index
+      ));
+      
+      $index++;
+    }
+    
+    $sql = $this->Model_komoditas->input_produksi($data);
+    redirect('admin/padi_post_stok');
     }
     else {
     $data['title'] = 'Tambah Data Padi';
@@ -966,11 +1037,37 @@ function edit_minyak_produksi()
     redirect('admin/stok_padi');
     }
     elseif (isset($_POST['next'])) {
-    redirect('admin/stok_berpati');
+      $id_komoditas = $_POST['id_komoditas'];
+        $stok_awal = $_POST['stok_awal']; // Ambil data telp dan masukkan ke variabel telp
+        $stok_akhir = $_POST['stok_akhir']; // Ambil data alamat dan masukkan ke variabel alamat
+        $konversi = $_POST['konversi']; 
+        $tahun = $_POST['tahun']; // Ambil data alamat dan masukkan ke variabel alamat
+        $quartal = $_POST['quartal']; // Ambil data alamat dan masukkan ke variabel alamat
+        $status = $_POST['status']; // Ambil data alamat dan masukkan ke variabel alamat
+        $komoditas = $_POST['komoditas'];
+        $data = array();
+    
+    $index = 0; // Set index array awal dengan 0
+    foreach($id_komoditas as $datakomoditas){ // Kita buat perulangan berdasarkan nis sampai data terakhir
+      array_push($data, array(
+        'id_komoditas'=>$datakomoditas,
+        'stok_awal'=>$stok_awal[$index],
+        'stok_akhir'=>$stok_akhir[$index], 
+        'konversi'=>$konversi[$index], 
+        'tahun'=>$tahun, 
+        'quartal'=>$quartal, 
+        'status'=>$status,  // Ambil dan set data nama sesuai index array dari $index
+      ));
+      
+      $index++;
+    }
+    
+    $sql = $this->Model_komoditas->input_stok($data);
+    redirect('admin/padi_post_impor');
     }
     else {
     $data['title'] = 'Tambah Data Stok';
-    $data['fields'] = $this->Model_komoditas->input_padi();
+    $data['fields'] = $this->Model_komoditas->input_padi_stok();
     $this->load->view('templates/header',$data);
     $this->load->view('templates/topnav'); 
     $this->template->load('templates','admin/stok/padi/input');
@@ -1807,6 +1904,7 @@ function edit_minyak_stok()
   function padi_post_impor()
 {
     if (isset($_POST['submit'])) {
+        
         $id_komoditas = $_POST['id_komoditas'];
         $angka_impor = $_POST['angka_impor'];  // Ambil data alamat dan masukkan ke variabel alamat
         $konversi = $_POST['konversi']; 
@@ -1815,13 +1913,21 @@ function edit_minyak_stok()
         $status = $_POST['status']; // Ambil data alamat dan masukkan ke variabel alamat
         $komoditas = $_POST['komoditas'];
         $data = array();
-    
-    $index = 0; // Set index array awal dengan 0
+    $index = 0;
+     // Set index array awal dengan 0
     foreach($id_komoditas as $datakomoditas){ // Kita buat perulangan berdasarkan nis sampai data terakhir
+
+      $query = "SELECT (produksi.produksi_kotor*produksi.konversi/1000) - (stok.stok_akhir-stok.stok_awal) + ($angka_impor[$index] * $konversi[$index]/1000) AS penyediaan_sblm, komoditas.id_komoditas FROM komoditas
+LEFT JOIN produksi ON produksi.id_komoditas = komoditas.id_komoditas
+LEFT JOIN stok ON stok.id_komoditas = komoditas.id_komoditas
+LEFT JOIN impor ON impor.id_komoditas = komoditas.id_komoditas
+WHERE stok.tahun = $tahun AND stok.quartal = '$quartal' AND stok.status = '$status'";
+        $kalkulasi = $this->db->query($query)->result();
       array_push($data, array(
         'id_komoditas'=>$datakomoditas,
         'angka_impor'=>$angka_impor[$index],
         'konversi'=>$konversi[$index], 
+        'penyediaan_sblm'=>$kalkulasi[$index]->penyediaan_sblm, 
         'tahun'=>$tahun, 
         'quartal'=>$quartal, 
         'status'=>$status,  // Ambil dan set data nama sesuai index array dari $index
@@ -1834,11 +1940,43 @@ function edit_minyak_stok()
     redirect('admin/impor_padi');
     }
     elseif (isset($_POST['next'])) {
-    redirect('admin/impor_berpati');
+      $id_komoditas = $_POST['id_komoditas'];
+        $angka_impor = $_POST['angka_impor'];  // Ambil data alamat dan masukkan ke variabel alamat
+        $konversi = $_POST['konversi']; 
+        $tahun = $_POST['tahun']; // Ambil data alamat dan masukkan ke variabel alamat
+        $quartal = $_POST['quartal']; // Ambil data alamat dan masukkan ke variabel alamat
+        $status = $_POST['status']; // Ambil data alamat dan masukkan ke variabel alamat
+        $komoditas = $_POST['komoditas'];
+        
+        $data = array();
+    
+    $index = 0; // Set index array awal dengan 0
+    foreach($id_komoditas as $datakomoditas){ // Kita buat perulangan berdasarkan nis sampai data terakhir
+      $query = "SELECT (produksi.produksi_kotor*produksi.konversi/1000) - (stok.stok_akhir-stok.stok_awal) + ($angka_impor[$index] * $konversi[$index]/1000) AS penyediaan_sblm, komoditas.id_komoditas FROM komoditas
+LEFT JOIN produksi ON produksi.id_komoditas = komoditas.id_komoditas
+LEFT JOIN stok ON stok.id_komoditas = komoditas.id_komoditas
+LEFT JOIN impor ON impor.id_komoditas = komoditas.id_komoditas
+WHERE stok.tahun = $tahun AND stok.quartal = '$quartal' AND stok.status = '$status'";
+        $kalkulasi = $this->db->query($query)->result();
+      array_push($data, array(
+        'id_komoditas'=>$datakomoditas,
+        'angka_impor'=>$angka_impor[$index],
+        'konversi'=>$konversi[$index],
+        'penyediaan_sblm'=>$kalkulasi[$index]->penyediaan_sblm,  
+        'tahun'=>$tahun, 
+        'quartal'=>$quartal, 
+        'status'=>$status,  // Ambil dan set data nama sesuai index array dari $index
+      ));
+      
+      $index++;
+    }
+    
+    $sql = $this->Model_komoditas->input_impor($data);
+    redirect('admin/padi_post_ekspor');
     }
     else {
     $data['title'] = 'Tambah Data impor';
-    $data['fields'] = $this->Model_komoditas->input_padi();
+    $data['fields'] = $this->Model_komoditas->input_padi_stok();
     $this->load->view('templates/header',$data);
     $this->load->view('templates/topnav'); 
     $this->template->load('templates','admin/impor/padi/input');
@@ -2669,10 +2807,16 @@ function edit_minyak_impor()
     
     $index = 0; // Set index array awal dengan 0
     foreach($id_komoditas as $datakomoditas){ // Kita buat perulangan berdasarkan nis sampai data terakhir
+      $query = "SELECT (impor.penyediaan_sblm) - ($angka_ekspor[$index] * $konversi[$index]/1000) AS penyediaan, komoditas.id_komoditas FROM komoditas
+LEFT JOIN ekspor ON ekspor.id_komoditas = komoditas.id_komoditas
+LEFT JOIN impor ON impor.id_komoditas = komoditas.id_komoditas
+WHERE impor.tahun = $tahun AND impor.quartal = '$quartal' AND impor.status = '$status'";
+        $kalkulasi = $this->db->query($query)->result();
       array_push($data, array(
         'id_komoditas'=>$datakomoditas,
         'angka_ekspor'=>$angka_ekspor[$index],
         'konversi'=>$konversi[$index], 
+        'penyediaan'=>$kalkulasi[$index]->penyediaan, 
         'tahun'=>$tahun, 
         'quartal'=>$quartal, 
         'status'=>$status,  // Ambil dan set data nama sesuai index array dari $index
@@ -2685,11 +2829,41 @@ function edit_minyak_impor()
     redirect('admin/ekspor_padi');
     }
     elseif (isset($_POST['next'])) {
-    redirect('admin/ekspor_berpati');
+     $id_komoditas = $_POST['id_komoditas'];
+        $angka_ekspor = $_POST['angka_ekspor'];  // Ambil data alamat dan masukkan ke variabel alamat
+        $konversi = $_POST['konversi']; 
+        $tahun = $_POST['tahun']; // Ambil data alamat dan masukkan ke variabel alamat
+        $quartal = $_POST['quartal']; // Ambil data alamat dan masukkan ke variabel alamat
+        $status = $_POST['status']; // Ambil data alamat dan masukkan ke variabel alamat
+        $komoditas = $_POST['komoditas'];
+        $data = array();
+    
+    $index = 0; // Set index array awal dengan 0
+    foreach($id_komoditas as $datakomoditas){ // Kita buat perulangan berdasarkan nis sampai data terakhir
+      $query = "SELECT (impor.penyediaan_sblm) - ($angka_ekspor[$index] * $konversi[$index]/1000) AS penyediaan, komoditas.id_komoditas FROM komoditas
+LEFT JOIN ekspor ON ekspor.id_komoditas = komoditas.id_komoditas
+LEFT JOIN impor ON impor.id_komoditas = komoditas.id_komoditas
+WHERE impor.tahun = $tahun AND impor.quartal = '$quartal' AND impor.status = '$status'";
+        $kalkulasi = $this->db->query($query)->result();
+      array_push($data, array(
+        'id_komoditas'=>$datakomoditas,
+        'angka_ekspor'=>$angka_ekspor[$index],
+        'konversi'=>$konversi[$index], 
+        'penyediaan'=>$kalkulasi[$index]->penyediaan, 
+        'tahun'=>$tahun, 
+        'quartal'=>$quartal, 
+        'status'=>$status,  // Ambil dan set data nama sesuai index array dari $index
+      ));
+      
+      $index++;
+    }
+    
+    $sql = $this->Model_komoditas->input_ekspor($data);
+    redirect('admin/padi_post_industrial');
     }
     else {
     $data['title'] = 'Tambah Data ekspor';
-    $data['fields'] = $this->Model_komoditas->input_padi();
+    $data['fields'] = $this->Model_komoditas->input_padi_stok();
     $this->load->view('templates/header',$data);
     $this->load->view('templates/topnav'); 
     $this->template->load('templates','admin/ekspor/padi/input');
@@ -3495,8 +3669,857 @@ function edit_minyak_ekspor()
   }
 
 
-  
 
+   function industrial_padi()
+  {
+    $data['title'] = 'Industrial Padi';
+    $data['fields'] = $this->Model_komoditas->industrial_padi();
+    $this->load->view('templates/header',$data);
+    $this->load->view('templates/topnav'); 
+    $this->template->load('templates','admin/industrial/padi/index');
+    $this->load->view('templates/footer');
+  }
+
+  function padi_post_industrial()
+{
+    if (isset($_POST['submit'])) {
+        $id_komoditas = $_POST['id_komoditas'];
+        $angka_industrial = $_POST['angka_industrial'];  // Ambil data alamat dan masukkan ke variabel alamat
+        $konversi = $_POST['konversi']; 
+        $tahun = $_POST['tahun']; // Ambil data alamat dan masukkan ke variabel alamat
+        $quartal = $_POST['quartal']; // Ambil data alamat dan masukkan ke variabel alamat
+        $status = $_POST['status']; // Ambil data alamat dan masukkan ke variabel alamat
+        $komoditas = $_POST['komoditas'];
+        $data = array();
+    
+    $index = 0; // Set index array awal dengan 0
+    foreach($id_komoditas as $datakomoditas){ // Kita buat perulangan berdasarkan nis sampai data terakhir
+      array_push($data, array(
+        'id_komoditas'=>$datakomoditas,
+        'angka_industrial'=>$angka_industrial[$index],
+        'konversi'=>$konversi[$index], 
+        'tahun'=>$tahun, 
+        'quartal'=>$quartal, 
+        'status'=>$status,  // Ambil dan set data nama sesuai index array dari $index
+      ));
+      
+      $index++;
+    }
+    
+    $sql = $this->Model_komoditas->input_industrial($data);
+    redirect('admin/industrial_padi');
+    }
+    elseif (isset($_POST['next'])) {
+
+    redirect('admin/industrial_berpati');
+    }
+    else {
+    $data['title'] = 'Tambah Data industrial';
+    $data['fields'] = $this->Model_komoditas->input_padi_stok();
+    $this->load->view('templates/header',$data);
+    $this->load->view('templates/topnav'); 
+    $this->template->load('templates','admin/industrial/padi/input');
+    $this->load->view('templates/footer');
+
+    }
+}
+
+function edit_padi_industrial()
+  {
+      if (isset($_POST['submit'])) {
+      $this->Model_komoditas->edit_industrial();
+      redirect('admin/industrial_padi');
+    } else {
+      $data['title'] = 'Edit Padi';
+      $id = $this->uri->segment(3);
+      $data['fields'] = $this->Model_komoditas->input_padi()->result();
+      $data['record'] = $this->Model_komoditas->get_id_industrial($id)->row_array();
+      $this->load->view('templates/header',$data);
+      $this->load->view('templates/topnav'); 
+      $this->template->load('templates','admin/industrial/padi/edit',$data);
+      $this->load->view('templates/footer');
+    }
+  }
+
+  function hapus_padi_industrial()
+  {
+    $id = $this->uri->segment(3);
+    $this->Model_komoditas->hapus_industrial($id);
+    redirect ('admin/industrial_padi');
+  }
+
+function industrial_berpati()
+  {
+    $data['title'] = 'industrial berpati';
+    $data['fields'] = $this->Model_komoditas->industrial_berpati();
+    $this->load->view('templates/header',$data);
+    $this->load->view('templates/topnav'); 
+    $this->template->load('templates','admin/industrial/berpati/index');
+    $this->load->view('templates/footer');
+  }
+
+  function berpati_post_industrial()
+{
+    if (isset($_POST['submit'])) {
+        $id_komoditas = $_POST['id_komoditas'];
+        $angka_industrial = $_POST['angka_industrial'];  // Ambil data alamat dan masukkan ke variabel alamat
+        $konversi = $_POST['konversi']; 
+        $tahun = $_POST['tahun']; // Ambil data alamat dan masukkan ke variabel alamat
+        $quartal = $_POST['quartal']; // Ambil data alamat dan masukkan ke variabel alamat
+        $status = $_POST['status']; // Ambil data alamat dan masukkan ke variabel alamat
+        $komoditas = $_POST['komoditas'];
+        $data = array();
+    
+    $index = 0; // Set index array awal dengan 0
+    foreach($id_komoditas as $datakomoditas){ // Kita buat perulangan berdasarkan nis sampai data terakhir
+      array_push($data, array(
+        'id_komoditas'=>$datakomoditas,
+        'angka_industrial'=>$angka_industrial[$index],
+        'konversi'=>$konversi[$index], 
+        'tahun'=>$tahun, 
+        'quartal'=>$quartal, 
+        'status'=>$status,  // Ambil dan set data nama sesuai index array dari $index
+      ));
+      
+      $index++;
+    }
+    
+    $sql = $this->Model_komoditas->input_industrial($data);
+    redirect('admin/industrial_berpati');
+    }
+    elseif (isset($_POST['next'])) {
+    redirect('admin/industrial_berpati');
+    }
+    else {
+    $data['title'] = 'Tambah Data industrial';
+    $data['fields'] = $this->Model_komoditas->input_berpati();
+    $this->load->view('templates/header',$data);
+    $this->load->view('templates/topnav'); 
+    $this->template->load('templates','admin/industrial/berpati/input');
+    $this->load->view('templates/footer');
+
+    }
+}
+
+function edit_berpati_industrial()
+  {
+      if (isset($_POST['submit'])) {
+      $this->Model_komoditas->edit_industrial();
+      redirect('admin/industrial_berpati');
+    } else {
+      $data['title'] = 'Edit berpati';
+      $id = $this->uri->segment(3);
+      $data['fields'] = $this->Model_komoditas->input_berpati()->result();
+      $data['record'] = $this->Model_komoditas->get_id_industrial($id)->row_array();
+      $this->load->view('templates/header',$data);
+      $this->load->view('templates/topnav'); 
+      $this->template->load('templates','admin/industrial/berpati/edit',$data);
+      $this->load->view('templates/footer');
+    }
+  }
+
+  function hapus_berpati_industrial()
+  {
+    $id = $this->uri->segment(3);
+    $this->Model_komoditas->hapus_industrial($id);
+    redirect ('admin/industrial_berpati');
+  }
+
+
+  function industrial_gula()
+  {
+    $data['title'] = 'industrial gula';
+    $data['fields'] = $this->Model_komoditas->industrial_gula();
+    $this->load->view('templates/header',$data);
+    $this->load->view('templates/topnav'); 
+    $this->template->load('templates','admin/industrial/gula/index');
+    $this->load->view('templates/footer');
+  }
+
+  function gula_post_industrial()
+{
+    if (isset($_POST['submit'])) {
+        $id_komoditas = $_POST['id_komoditas'];
+        $angka_industrial = $_POST['angka_industrial'];  // Ambil data alamat dan masukkan ke variabel alamat
+        $konversi = $_POST['konversi']; 
+        $tahun = $_POST['tahun']; // Ambil data alamat dan masukkan ke variabel alamat
+        $quartal = $_POST['quartal']; // Ambil data alamat dan masukkan ke variabel alamat
+        $status = $_POST['status']; // Ambil data alamat dan masukkan ke variabel alamat
+        $komoditas = $_POST['komoditas'];
+        $data = array();
+    
+    $index = 0; // Set index array awal dengan 0
+    foreach($id_komoditas as $datakomoditas){ // Kita buat perulangan berdasarkan nis sampai data terakhir
+      array_push($data, array(
+        'id_komoditas'=>$datakomoditas,
+        'angka_industrial'=>$angka_industrial[$index],
+        'konversi'=>$konversi[$index], 
+        'tahun'=>$tahun, 
+        'quartal'=>$quartal, 
+        'status'=>$status,  // Ambil dan set data nama sesuai index array dari $index
+      ));
+      
+      $index++;
+    }
+    
+    $sql = $this->Model_komoditas->input_industrial($data);
+    redirect('admin/industrial_gula');
+    }
+    elseif (isset($_POST['next'])) {
+    redirect('admin/industrial_berpati');
+    }
+    else {
+    $data['title'] = 'Tambah Data industrial';
+    $data['fields'] = $this->Model_komoditas->input_gula();
+    $this->load->view('templates/header',$data);
+    $this->load->view('templates/topnav'); 
+    $this->template->load('templates','admin/industrial/gula/input');
+    $this->load->view('templates/footer');
+
+    }
+}
+
+function edit_gula_industrial()
+  {
+      if (isset($_POST['submit'])) {
+      $this->Model_komoditas->edit_industrial();
+      redirect('admin/industrial_gula');
+    } else {
+      $data['title'] = 'Edit gula';
+      $id = $this->uri->segment(3);
+      $data['fields'] = $this->Model_komoditas->input_gula()->result();
+      $data['record'] = $this->Model_komoditas->get_id_industrial($id)->row_array();
+      $this->load->view('templates/header',$data);
+      $this->load->view('templates/topnav'); 
+      $this->template->load('templates','admin/industrial/gula/edit',$data);
+      $this->load->view('templates/footer');
+    }
+  }
+
+  function hapus_gula_industrial()
+  {
+    $id = $this->uri->segment(3);
+    $this->Model_komoditas->hapus_industrial($id);
+    redirect ('admin/industrial_gula');
+  }
+
+
+function industrial_biji()
+  {
+    $data['title'] = 'industrial biji';
+    $data['fields'] = $this->Model_komoditas->industrial_biji();
+    $this->load->view('templates/header',$data);
+    $this->load->view('templates/topnav'); 
+    $this->template->load('templates','admin/industrial/biji/index');
+    $this->load->view('templates/footer');
+  }
+
+  function biji_post_industrial()
+{
+    if (isset($_POST['submit'])) {
+        $id_komoditas = $_POST['id_komoditas'];
+        $angka_industrial = $_POST['angka_industrial'];  // Ambil data alamat dan masukkan ke variabel alamat
+        $konversi = $_POST['konversi']; 
+        $tahun = $_POST['tahun']; // Ambil data alamat dan masukkan ke variabel alamat
+        $quartal = $_POST['quartal']; // Ambil data alamat dan masukkan ke variabel alamat
+        $status = $_POST['status']; // Ambil data alamat dan masukkan ke variabel alamat
+        $komoditas = $_POST['komoditas'];
+        $data = array();
+    
+    $index = 0; // Set index array awal dengan 0
+    foreach($id_komoditas as $datakomoditas){ // Kita buat perulangan berdasarkan nis sampai data terakhir
+      array_push($data, array(
+        'id_komoditas'=>$datakomoditas,
+        'angka_industrial'=>$angka_industrial[$index],
+        'konversi'=>$konversi[$index], 
+        'tahun'=>$tahun, 
+        'quartal'=>$quartal, 
+        'status'=>$status,  // Ambil dan set data nama sesuai index array dari $index
+      ));
+      
+      $index++;
+    }
+    
+    $sql = $this->Model_komoditas->input_industrial($data);
+    redirect('admin/industrial_biji');
+    }
+    elseif (isset($_POST['next'])) {
+    redirect('admin/industrial_berpati');
+    }
+    else {
+    $data['title'] = 'Tambah Data industrial';
+    $data['fields'] = $this->Model_komoditas->input_biji();
+    $this->load->view('templates/header',$data);
+    $this->load->view('templates/topnav'); 
+    $this->template->load('templates','admin/industrial/biji/input');
+    $this->load->view('templates/footer');
+
+    }
+}
+
+function edit_biji_industrial()
+  {
+      if (isset($_POST['submit'])) {
+      $this->Model_komoditas->edit_industrial();
+      redirect('admin/industrial_biji');
+    } else {
+      $data['title'] = 'Edit biji';
+      $id = $this->uri->segment(3);
+      $data['fields'] = $this->Model_komoditas->input_biji()->result();
+      $data['record'] = $this->Model_komoditas->get_id_industrial($id)->row_array();
+      $this->load->view('templates/header',$data);
+      $this->load->view('templates/topnav'); 
+      $this->template->load('templates','admin/industrial/biji/edit',$data);
+      $this->load->view('templates/footer');
+    }
+  }
+
+  function hapus_biji_industrial()
+  {
+    $id = $this->uri->segment(3);
+    $this->Model_komoditas->hapus_industrial($id);
+    redirect ('admin/industrial_biji');
+  }
+
+function industrial_buah()
+  {
+    $data['title'] = 'industrial buah';
+    $data['fields'] = $this->Model_komoditas->industrial_buah();
+    $this->load->view('templates/header',$data);
+    $this->load->view('templates/topnav'); 
+    $this->template->load('templates','admin/industrial/buah/index');
+    $this->load->view('templates/footer');
+  }
+
+  function buah_post_industrial()
+{
+    if (isset($_POST['submit'])) {
+        $id_komoditas = $_POST['id_komoditas'];
+        $angka_industrial = $_POST['angka_industrial'];  // Ambil data alamat dan masukkan ke variabel alamat
+        $konversi = $_POST['konversi']; 
+        $tahun = $_POST['tahun']; // Ambil data alamat dan masukkan ke variabel alamat
+        $quartal = $_POST['quartal']; // Ambil data alamat dan masukkan ke variabel alamat
+        $status = $_POST['status']; // Ambil data alamat dan masukkan ke variabel alamat
+        $komoditas = $_POST['komoditas'];
+        $data = array();
+    
+    $index = 0; // Set index array awal dengan 0
+    foreach($id_komoditas as $datakomoditas){ // Kita buat perulangan berdasarkan nis sampai data terakhir
+      array_push($data, array(
+        'id_komoditas'=>$datakomoditas,
+        'angka_industrial'=>$angka_industrial[$index],
+        'konversi'=>$konversi[$index], 
+        'tahun'=>$tahun, 
+        'quartal'=>$quartal, 
+        'status'=>$status,  // Ambil dan set data nama sesuai index array dari $index
+      ));
+      
+      $index++;
+    }
+    
+    $sql = $this->Model_komoditas->input_industrial($data);
+    redirect('admin/industrial_buah');
+    }
+    elseif (isset($_POST['next'])) {
+    redirect('admin/industrial_berpati');
+    }
+    else {
+    $data['title'] = 'Tambah Data industrial';
+    $data['fields'] = $this->Model_komoditas->input_buah();
+    $this->load->view('templates/header',$data);
+    $this->load->view('templates/topnav'); 
+    $this->template->load('templates','admin/industrial/buah/input');
+    $this->load->view('templates/footer');
+
+    }
+}
+
+function edit_buah_industrial()
+  {
+      if (isset($_POST['submit'])) {
+      $this->Model_komoditas->edit_industrial();
+      redirect('admin/industrial_buah');
+    } else {
+      $data['title'] = 'Edit buah';
+      $id = $this->uri->segment(3);
+      $data['fields'] = $this->Model_komoditas->input_buah()->result();
+      $data['record'] = $this->Model_komoditas->get_id_industrial($id)->row_array();
+      $this->load->view('templates/header',$data);
+      $this->load->view('templates/topnav'); 
+      $this->template->load('templates','admin/industrial/buah/edit',$data);
+      $this->load->view('templates/footer');
+    }
+  }
+
+  function hapus_buah_industrial()
+  {
+    $id = $this->uri->segment(3);
+    $this->Model_komoditas->hapus_industrial($id);
+    redirect ('admin/industrial_buah');
+  }
+
+function industrial_sayur()
+  {
+    $data['title'] = 'industrial sayur';
+    $data['fields'] = $this->Model_komoditas->industrial_sayur();
+    $this->load->view('templates/header',$data);
+    $this->load->view('templates/topnav'); 
+    $this->template->load('templates','admin/industrial/sayur/index');
+    $this->load->view('templates/footer');
+  }
+
+  function sayur_post_industrial()
+{
+    if (isset($_POST['submit'])) {
+        $id_komoditas = $_POST['id_komoditas'];
+        $angka_industrial = $_POST['angka_industrial'];  // Ambil data alamat dan masukkan ke variabel alamat
+        $konversi = $_POST['konversi']; 
+        $tahun = $_POST['tahun']; // Ambil data alamat dan masukkan ke variabel alamat
+        $quartal = $_POST['quartal']; // Ambil data alamat dan masukkan ke variabel alamat
+        $status = $_POST['status']; // Ambil data alamat dan masukkan ke variabel alamat
+        $komoditas = $_POST['komoditas'];
+        $data = array();
+    
+    $index = 0; // Set index array awal dengan 0
+    foreach($id_komoditas as $datakomoditas){ // Kita buat perulangan berdasarkan nis sampai data terakhir
+      array_push($data, array(
+        'id_komoditas'=>$datakomoditas,
+        'angka_industrial'=>$angka_industrial[$index],
+        'konversi'=>$konversi[$index], 
+        'tahun'=>$tahun, 
+        'quartal'=>$quartal, 
+        'status'=>$status,  // Ambil dan set data nama sesuai index array dari $index
+      ));
+      
+      $index++;
+    }
+    
+    $sql = $this->Model_komoditas->input_industrial($data);
+    redirect('admin/industrial_sayur');
+    }
+    elseif (isset($_POST['next'])) {
+    redirect('admin/industrial_berpati');
+    }
+    else {
+    $data['title'] = 'Tambah Data industrial';
+    $data['fields'] = $this->Model_komoditas->input_sayur();
+    $this->load->view('templates/header',$data);
+    $this->load->view('templates/topnav'); 
+    $this->template->load('templates','admin/industrial/sayur/input');
+    $this->load->view('templates/footer');
+
+    }
+}
+
+function edit_sayur_industrial()
+  {
+      if (isset($_POST['submit'])) {
+      $this->Model_komoditas->edit_industrial();
+      redirect('admin/industrial_sayur');
+    } else {
+      $data['title'] = 'Edit sayur';
+      $id = $this->uri->segment(3);
+      $data['fields'] = $this->Model_komoditas->input_sayur()->result();
+      $data['record'] = $this->Model_komoditas->get_id_industrial($id)->row_array();
+      $this->load->view('templates/header',$data);
+      $this->load->view('templates/topnav'); 
+      $this->template->load('templates','admin/industrial/sayur/edit',$data);
+      $this->load->view('templates/footer');
+    }
+  }
+
+  function hapus_sayur_industrial()
+  {
+    $id = $this->uri->segment(3);
+    $this->Model_komoditas->hapus_industrial($id);
+    redirect ('admin/industrial_sayur');
+  }
+
+function industrial_daging()
+  {
+    $data['title'] = 'industrial daging';
+    $data['fields'] = $this->Model_komoditas->industrial_daging();
+    $this->load->view('templates/header',$data);
+    $this->load->view('templates/topnav'); 
+    $this->template->load('templates','admin/industrial/daging/index');
+    $this->load->view('templates/footer');
+  }
+
+  function daging_post_industrial()
+{
+    if (isset($_POST['submit'])) {
+        $id_komoditas = $_POST['id_komoditas'];
+        $angka_industrial = $_POST['angka_industrial'];  // Ambil data alamat dan masukkan ke variabel alamat
+        $konversi = $_POST['konversi']; 
+        $tahun = $_POST['tahun']; // Ambil data alamat dan masukkan ke variabel alamat
+        $quartal = $_POST['quartal']; // Ambil data alamat dan masukkan ke variabel alamat
+        $status = $_POST['status']; // Ambil data alamat dan masukkan ke variabel alamat
+        $komoditas = $_POST['komoditas'];
+        $data = array();
+    
+    $index = 0; // Set index array awal dengan 0
+    foreach($id_komoditas as $datakomoditas){ // Kita buat perulangan berdasarkan nis sampai data terakhir
+      array_push($data, array(
+        'id_komoditas'=>$datakomoditas,
+        'angka_industrial'=>$angka_industrial[$index],
+        'konversi'=>$konversi[$index], 
+        'tahun'=>$tahun, 
+        'quartal'=>$quartal, 
+        'status'=>$status,  // Ambil dan set data nama sesuai index array dari $index
+      ));
+      
+      $index++;
+    }
+    
+    $sql = $this->Model_komoditas->input_industrial($data);
+    redirect('admin/industrial_daging');
+    }
+    elseif (isset($_POST['next'])) {
+    redirect('admin/industrial_berpati');
+    }
+    else {
+    $data['title'] = 'Tambah Data industrial';
+    $data['fields'] = $this->Model_komoditas->input_daging();
+    $this->load->view('templates/header',$data);
+    $this->load->view('templates/topnav'); 
+    $this->template->load('templates','admin/industrial/daging/input');
+    $this->load->view('templates/footer');
+
+    }
+}
+
+function edit_daging_industrial()
+  {
+      if (isset($_POST['submit'])) {
+      $this->Model_komoditas->edit_industrial();
+      redirect('admin/industrial_daging');
+    } else {
+      $data['title'] = 'Edit daging';
+      $id = $this->uri->segment(3);
+      $data['fields'] = $this->Model_komoditas->input_daging()->result();
+      $data['record'] = $this->Model_komoditas->get_id_industrial($id)->row_array();
+      $this->load->view('templates/header',$data);
+      $this->load->view('templates/topnav'); 
+      $this->template->load('templates','admin/industrial/daging/edit',$data);
+      $this->load->view('templates/footer');
+    }
+  }
+
+  function hapus_daging_industrial()
+  {
+    $id = $this->uri->segment(3);
+    $this->Model_komoditas->hapus_industrial($id);
+    redirect ('admin/industrial_daging');
+  }
+
+function industrial_telur()
+  {
+    $data['title'] = 'industrial telur';
+    $data['fields'] = $this->Model_komoditas->industrial_telur();
+    $this->load->view('templates/header',$data);
+    $this->load->view('templates/topnav'); 
+    $this->template->load('templates','admin/industrial/telur/index');
+    $this->load->view('templates/footer');
+  }
+
+  function telur_post_industrial()
+{
+    if (isset($_POST['submit'])) {
+        $id_komoditas = $_POST['id_komoditas'];
+        $angka_industrial = $_POST['angka_industrial'];  // Ambil data alamat dan masukkan ke variabel alamat
+        $konversi = $_POST['konversi']; 
+        $tahun = $_POST['tahun']; // Ambil data alamat dan masukkan ke variabel alamat
+        $quartal = $_POST['quartal']; // Ambil data alamat dan masukkan ke variabel alamat
+        $status = $_POST['status']; // Ambil data alamat dan masukkan ke variabel alamat
+        $komoditas = $_POST['komoditas'];
+        $data = array();
+    
+    $index = 0; // Set index array awal dengan 0
+    foreach($id_komoditas as $datakomoditas){ // Kita buat perulangan berdasarkan nis sampai data terakhir
+      array_push($data, array(
+        'id_komoditas'=>$datakomoditas,
+        'angka_industrial'=>$angka_industrial[$index],
+        'konversi'=>$konversi[$index], 
+        'tahun'=>$tahun, 
+        'quartal'=>$quartal, 
+        'status'=>$status,  // Ambil dan set data nama sesuai index array dari $index
+      ));
+      
+      $index++;
+    }
+    
+    $sql = $this->Model_komoditas->input_industrial($data);
+    redirect('admin/industrial_telur');
+    }
+    elseif (isset($_POST['next'])) {
+    redirect('admin/industrial_berpati');
+    }
+    else {
+    $data['title'] = 'Tambah Data industrial';
+    $data['fields'] = $this->Model_komoditas->input_telur();
+    $this->load->view('templates/header',$data);
+    $this->load->view('templates/topnav'); 
+    $this->template->load('templates','admin/industrial/telur/input');
+    $this->load->view('templates/footer');
+
+    }
+}
+
+function edit_telur_industrial()
+  {
+      if (isset($_POST['submit'])) {
+      $this->Model_komoditas->edit_industrial();
+      redirect('admin/industrial_telur');
+    } else {
+      $data['title'] = 'Edit telur';
+      $id = $this->uri->segment(3);
+      $data['fields'] = $this->Model_komoditas->input_telur()->result();
+      $data['record'] = $this->Model_komoditas->get_id_industrial($id)->row_array();
+      $this->load->view('templates/header',$data);
+      $this->load->view('templates/topnav'); 
+      $this->template->load('templates','admin/industrial/telur/edit',$data);
+      $this->load->view('templates/footer');
+    }
+  }
+
+  function hapus_telur_industrial()
+  {
+    $id = $this->uri->segment(3);
+    $this->Model_komoditas->hapus_industrial($id);
+    redirect ('admin/industrial_telur');
+  }
+
+function industrial_susu()
+  {
+    $data['title'] = 'industrial susu';
+    $data['fields'] = $this->Model_komoditas->industrial_susu();
+    $this->load->view('templates/header',$data);
+    $this->load->view('templates/topnav'); 
+    $this->template->load('templates','admin/industrial/susu/index');
+    $this->load->view('templates/footer');
+  }
+
+  function susu_post_industrial()
+{
+    if (isset($_POST['submit'])) {
+        $id_komoditas = $_POST['id_komoditas'];
+        $angka_industrial = $_POST['angka_industrial'];  // Ambil data alamat dan masukkan ke variabel alamat
+        $konversi = $_POST['konversi']; 
+        $tahun = $_POST['tahun']; // Ambil data alamat dan masukkan ke variabel alamat
+        $quartal = $_POST['quartal']; // Ambil data alamat dan masukkan ke variabel alamat
+        $status = $_POST['status']; // Ambil data alamat dan masukkan ke variabel alamat
+        $komoditas = $_POST['komoditas'];
+        $data = array();
+    
+    $index = 0; // Set index array awal dengan 0
+    foreach($id_komoditas as $datakomoditas){ // Kita buat perulangan berdasarkan nis sampai data terakhir
+      array_push($data, array(
+        'id_komoditas'=>$datakomoditas,
+        'angka_industrial'=>$angka_industrial[$index],
+        'konversi'=>$konversi[$index], 
+        'tahun'=>$tahun, 
+        'quartal'=>$quartal, 
+        'status'=>$status,  // Ambil dan set data nama sesuai index array dari $index
+      ));
+      
+      $index++;
+    }
+    
+    $sql = $this->Model_komoditas->input_industrial($data);
+    redirect('admin/industrial_susu');
+    }
+    elseif (isset($_POST['next'])) {
+    redirect('admin/industrial_berpati');
+    }
+    else {
+    $data['title'] = 'Tambah Data industrial';
+    $data['fields'] = $this->Model_komoditas->input_susu();
+    $this->load->view('templates/header',$data);
+    $this->load->view('templates/topnav'); 
+    $this->template->load('templates','admin/industrial/susu/input');
+    $this->load->view('templates/footer');
+
+    }
+}
+
+function edit_susu_industrial()
+  {
+      if (isset($_POST['submit'])) {
+      $this->Model_komoditas->edit_industrial();
+      redirect('admin/industrial_susu');
+    } else {
+      $data['title'] = 'Edit susu';
+      $id = $this->uri->segment(3);
+      $data['fields'] = $this->Model_komoditas->input_susu()->result();
+      $data['record'] = $this->Model_komoditas->get_id_industrial($id)->row_array();
+      $this->load->view('templates/header',$data);
+      $this->load->view('templates/topnav'); 
+      $this->template->load('templates','admin/industrial/susu/edit',$data);
+      $this->load->view('templates/footer');
+    }
+  }
+
+  function hapus_susu_industrial()
+  {
+    $id = $this->uri->segment(3);
+    $this->Model_komoditas->hapus_industrial($id);
+    redirect ('admin/industrial_susu');
+  }
+
+function industrial_ikan()
+  {
+    $data['title'] = 'industrial ikan';
+    $data['fields'] = $this->Model_komoditas->industrial_ikan();
+    $this->load->view('templates/header',$data);
+    $this->load->view('templates/topnav'); 
+    $this->template->load('templates','admin/industrial/ikan/index');
+    $this->load->view('templates/footer');
+  }
+
+  function ikan_post_industrial()
+{
+    if (isset($_POST['submit'])) {
+        $id_komoditas = $_POST['id_komoditas'];
+        $angka_industrial = $_POST['angka_industrial'];  // Ambil data alamat dan masukkan ke variabel alamat
+        $konversi = $_POST['konversi']; 
+        $tahun = $_POST['tahun']; // Ambil data alamat dan masukkan ke variabel alamat
+        $quartal = $_POST['quartal']; // Ambil data alamat dan masukkan ke variabel alamat
+        $status = $_POST['status']; // Ambil data alamat dan masukkan ke variabel alamat
+        $komoditas = $_POST['komoditas'];
+        $data = array();
+    
+    $index = 0; // Set index array awal dengan 0
+    foreach($id_komoditas as $datakomoditas){ // Kita buat perulangan berdasarkan nis sampai data terakhir
+      array_push($data, array(
+        'id_komoditas'=>$datakomoditas,
+        'angka_industrial'=>$angka_industrial[$index],
+        'konversi'=>$konversi[$index], 
+        'tahun'=>$tahun, 
+        'quartal'=>$quartal, 
+        'status'=>$status,  // Ambil dan set data nama sesuai index array dari $index
+      ));
+      
+      $index++;
+    }
+    
+    $sql = $this->Model_komoditas->input_industrial($data);
+    redirect('admin/industrial_ikan');
+    }
+    elseif (isset($_POST['next'])) {
+    redirect('admin/industrial_berpati');
+    }
+    else {
+    $data['title'] = 'Tambah Data industrial';
+    $data['fields'] = $this->Model_komoditas->input_ikan();
+    $this->load->view('templates/header',$data);
+    $this->load->view('templates/topnav'); 
+    $this->template->load('templates','admin/industrial/ikan/input');
+    $this->load->view('templates/footer');
+
+    }
+}
+
+function edit_ikan_industrial()
+  {
+      if (isset($_POST['submit'])) {
+      $this->Model_komoditas->edit_industrial();
+      redirect('admin/industrial_ikan');
+    } else {
+      $data['title'] = 'Edit ikan';
+      $id = $this->uri->segment(3);
+      $data['fields'] = $this->Model_komoditas->input_ikan()->result();
+      $data['record'] = $this->Model_komoditas->get_id_industrial($id)->row_array();
+      $this->load->view('templates/header',$data);
+      $this->load->view('templates/topnav'); 
+      $this->template->load('templates','admin/industrial/ikan/edit',$data);
+      $this->load->view('templates/footer');
+    }
+  }
+
+  function hapus_ikan_industrial()
+  {
+    $id = $this->uri->segment(3);
+    $this->Model_komoditas->hapus_industrial($id);
+    redirect ('admin/industrial_ikan');
+  }
+
+function industrial_minyak()
+  {
+    $data['title'] = 'industrial minyak';
+    $data['fields'] = $this->Model_komoditas->industrial_minyak();
+    $this->load->view('templates/header',$data);
+    $this->load->view('templates/topnav'); 
+    $this->template->load('templates','admin/industrial/minyak/index');
+    $this->load->view('templates/footer');
+  }
+
+  function minyak_post_industrial()
+{
+    if (isset($_POST['submit'])) {
+        $id_komoditas = $_POST['id_komoditas'];
+        $angka_industrial = $_POST['angka_industrial'];  // Ambil data alamat dan masukkan ke variabel alamat
+        $konversi = $_POST['konversi']; 
+        $tahun = $_POST['tahun']; // Ambil data alamat dan masukkan ke variabel alamat
+        $quartal = $_POST['quartal']; // Ambil data alamat dan masukkan ke variabel alamat
+        $status = $_POST['status']; // Ambil data alamat dan masukkan ke variabel alamat
+        $komoditas = $_POST['komoditas'];
+        $data = array();
+    
+    $index = 0; // Set index array awal dengan 0
+    foreach($id_komoditas as $datakomoditas){ // Kita buat perulangan berdasarkan nis sampai data terakhir
+      array_push($data, array(
+        'id_komoditas'=>$datakomoditas,
+        'angka_industrial'=>$angka_industrial[$index],
+        'konversi'=>$konversi[$index], 
+        'tahun'=>$tahun, 
+        'quartal'=>$quartal, 
+        'status'=>$status,  // Ambil dan set data nama sesuai index array dari $index
+      ));
+      
+      $index++;
+    }
+    
+    $sql = $this->Model_komoditas->input_industrial($data);
+    redirect('admin/industrial_minyak');
+    }
+    elseif (isset($_POST['next'])) {
+    redirect('admin/industrial_berpati');
+    }
+    else {
+    $data['title'] = 'Tambah Data industrial';
+    $data['fields'] = $this->Model_komoditas->input_minyak();
+    $this->load->view('templates/header',$data);
+    $this->load->view('templates/topnav'); 
+    $this->template->load('templates','admin/industrial/minyak/input');
+    $this->load->view('templates/footer');
+
+    }
+}
+
+function edit_minyak_industrial()
+  {
+      if (isset($_POST['submit'])) {
+      $this->Model_komoditas->edit_industrial();
+      redirect('admin/industrial_minyak');
+    } else {
+      $data['title'] = 'Edit minyak';
+      $id = $this->uri->segment(3);
+      $data['fields'] = $this->Model_komoditas->input_minyak()->result();
+      $data['record'] = $this->Model_komoditas->get_id_industrial($id)->row_array();
+      $this->load->view('templates/header',$data);
+      $this->load->view('templates/topnav'); 
+      $this->template->load('templates','admin/industrial/minyak/edit',$data);
+      $this->load->view('templates/footer');
+    }
+  }
+
+  function hapus_minyak_industrial()
+  {
+    $id = $this->uri->segment(3);
+    $this->Model_komoditas->hapus_industrial($id);
+    redirect ('admin/industrial_minyak');
+  }
+  
 }
 
 

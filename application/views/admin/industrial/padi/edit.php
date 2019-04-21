@@ -1,7 +1,7 @@
 <div class="col-12 grid-margin">
 <div class="card">
                 <div class="card-body">
-                  <h3>Edit Padi</h3>
+                  <h3>Edit Padi Industrial Use</h3>
                   <p class="card-description">
                     Data Komoditas Padi
                   </p>
@@ -29,12 +29,8 @@
                     <?php endforeach; ?>
                     </div>
                     <div class="form-group">
-                      <label for="exampleInputName1">Stok Awal</label>
-                      <input type="text" class="form-control" id="stok_awal" name="stok_awal" value="<?= $record['stok_awal']; ?>">
-                    </div>
-                    <div class="form-group">
-                      <label for="exampleInputEmail3">Stok Akhir</label>
-                      <input type="text" class="form-control" id="stok_akhir" name="stok_akhir" value="<?= $record['stok_akhir']; ?>">
+                      <label for="exampleInputName1">Penggunaan Industrial<br>(Ton)</label>
+                      <input type="text" class="form-control" id="angka_industrial" name="angka_industrial" value="<?= $record['angka_industrial']; ?>">
                     </div>
                     <div class="form-group">
                       <label for="exampleInputEmail3">Extraction Rate</label>

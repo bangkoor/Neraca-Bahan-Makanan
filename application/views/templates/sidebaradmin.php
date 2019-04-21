@@ -15,18 +15,25 @@
                   </div>
                 </div>
               </div>
-        
+              <!-- <button class="btn btn-success btn-block">Laporan Baru
+                <i class="mdi mdi-plus"></i>
+              </button> -->
             </div>
           </li>
           <li class="nav-item <?php if($this->uri->segment(1) == "home"){echo "active"; } ?>">
             <a class="nav-link" href="<?php echo base_url(); ?>dashboard">
               <i class="menu-icon mdi mdi-television"></i>
-              <span class="menu-title">Dasbor</span>
+              <span class="menu-title">Dasbord</span>
             </a>
           </li>
-          
-          <li class="nav-item <?php if($this->uri->segment(1) == "produksi"){echo "active"; } ?>">
-            <a class="nav-link" data-toggle="collapse" href="#produksi" aria-expanded="false" aria-controls="ui-basic">
+          <li class="nav-item <?php if($this->uri->segment(1) == "user"){echo "active"; } ?>">
+            <a class="nav-link" href="<?php echo base_url(); ?>user">
+              <i class="menu-icon mdi mdi-account"></i>
+              <span class="menu-title">User</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#produksi" aria-expanded="false" aria-controls="produksi">
               <i class="menu-icon mdi mdi-factory"></i>
               <span class="menu-title">Produksi</span>
               <i class="menu-arrow"></i>
@@ -34,44 +41,44 @@
             <div class="collapse" id="produksi">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item">
-                  <a class="nav-link" href="<?php echo base_url(); ?>admin/padi">Padi-padian/<i>Cereals</i></a>
+                  <a class="nav-link" href="<?php echo base_url(); ?>admin/produksi_padi">Padi-padian/<i>Cereals</i></a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="<?php echo base_url(); ?>admin/berpati">Makanan Berpati/<i>Starchy Foods</i></a>
+                  <a class="nav-link" href="<?php echo base_url(); ?>admin/produksi_berpati">Makanan Berpati/<i>Starchy Foods</i></a>
                 </li>
 				<li class="nav-item">
-                  <a class="nav-link" href="<?php echo base_url(); ?>admin/gula">Gula/<i>Sugar</i></a>
+                  <a class="nav-link" href="<?php echo base_url(); ?>admin/produksi_gula">Gula/<i>Sugar</i></a>
                 </li>
 				<li class="nav-item">
-                  <a class="nav-link" href="<?php echo base_url(); ?>admin/biji">Buah Biji Berminyak/<i>Pulses Nut & Oil Seeds</i></a>
+                  <a class="nav-link" href="<?php echo base_url(); ?>admin/produksi_biji">Buah Biji Berminyak/<i>Pulses Nut & Oil Seeds</i></a>
                 </li>
 				<li class="nav-item">
-                  <a class="nav-link" href="<?php echo base_url(); ?>admin/buah">Buah-buahan/<i>Fruits</i></a>
+                  <a class="nav-link" href="<?php echo base_url(); ?>admin/produksi_buah">Buah-buahan/<i>Fruits</i></a>
                 </li>
 				<li class="nav-item">
-                  <a class="nav-link" href="<?php echo base_url(); ?>admin/sayur">Sayur-sayuran/<i>Vegetables</i></a>
+                  <a class="nav-link" href="<?php echo base_url(); ?>admin/produksi_sayur">Sayur-sayuran/<i>Vegetables</i></a>
                 </li>
 				<li class="nav-item">
-                  <a class="nav-link" href="<?php echo base_url(); ?>admin/daging">Daging/<i>Meat</i></a>
+                  <a class="nav-link" href="<?php echo base_url(); ?>admin/produksi_daging">Daging/<i>Meat</i></a>
                 </li>
 				<li class="nav-item">
-                  <a class="nav-link" href="<?php echo base_url(); ?>admin/telur">Telur/<i>Eggs</i></a>
+                  <a class="nav-link" href="<?php echo base_url(); ?>admin/produksi_telur">Telur/<i>Eggs</i></a>
                 </li>
 				<li class="nav-item">
-                  <a class="nav-link" href="<?php echo base_url(); ?>admin/susu">Susu/<i>Milk</i></a>
+                  <a class="nav-link" href="<?php echo base_url(); ?>admin/produksi_susu">Susu/<i>Milk</i></a>
                 </li>
 				<li class="nav-item">
-                  <a class="nav-link" href="<?php echo base_url(); ?>admin/ikan">Ikan/<i>Fish</i></a>
+                  <a class="nav-link" href="<?php echo base_url(); ?>admin/produksi_ikan">Ikan/<i>Fish</i></a>
                 </li>
 				<li class="nav-item">
-                  <a class="nav-link" href="<?php echo base_url(); ?>admin/minyak">Minyak & Lemak/<i>Oil & Fats</i></a>
+                  <a class="nav-link" href="<?php echo base_url(); ?>admin/produksi_minyak">Minyak & Lemak/<i>Oil & Fats</i></a>
                 </li>
               </ul>
             </div>
           </li>
 
-		  <li class="nav-item <?php if($this->uri->segment(1) == "stok"){echo "active"; } ?>">
-            <a class="nav-link" data-toggle="collapse" href="#stok" aria-expanded="false" aria-controls="ui-basic">
+		  <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#stok" aria-expanded="false" aria-controls="stok">
               <i class="menu-icon mdi mdi-elevation-rise"></i>
               <span class="menu-title">Stok</span> 
               <i class="menu-arrow"></i>
@@ -79,43 +86,46 @@
             <div class="collapse" id="stok">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item">
-                  <a class="nav-link" href="">Padi-padian/<i>Cereals</i></a>
+                  <a class="nav-link" href="<?php echo base_url(); ?>admin/stok_padi">Padi-padian/<i>Cereals</i></a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="">Makanan Berpati/<i>Starchy Foods</i></a>
+                  <a class="nav-link" href="<?php echo base_url(); ?>admin/stok_berpati">Makanan Berpati/<i>Starchy Foods</i></a>
                 </li>
 				<li class="nav-item">
-                  <a class="nav-link" href="">Gula/<i>Sugar</i></a>
+                  <a class="nav-link" href="<?php echo base_url(); ?>admin/stok_gula">Gula/<i>Sugar</i></a>
                 </li>
 				<li class="nav-item">
-                  <a class="nav-link" href="">Buah Biji Berminyak/<i>Pulses Nut & Oil Seeds</i></a>
+                  <a class="nav-link" href="<?php echo base_url(); ?>admin/stok_biji">Buah Biji Berminyak/<i>Pulses Nut & Oil Seeds</i></a>
                 </li>
 				<li class="nav-item">
-                  <a class="nav-link" href="">Buah-buahan/<i>Fruits</i></a>
+                  <a class="nav-link" href="<?php echo base_url(); ?>admin/stok_buah">Buah-buahan/<i>Fruits</i></a>
                 </li>
 				<li class="nav-item">
-                  <a class="nav-link" href="">Sayur-sayuran/<i>Vegetables</i></a>
+                  <a class="nav-link" href="<?php echo base_url(); ?>admin/stok_sayur">Sayur-sayuran/<i>Vegetables</i></a>
                 </li>
 				<li class="nav-item">
-                  <a class="nav-link" href="">Daging/<i>Meat</i></a>
+                  <a class="nav-link" href="<?php echo base_url(); ?>admin/stok_daging">Daging/<i>Meat</i></a>
                 </li>
 				<li class="nav-item">
-                  <a class="nav-link" href="">Telur/<i>Eggs</i></a>
+                  <a class="nav-link" href="<?php echo base_url(); ?>admin/stok_telur">Telur/<i>Eggs</i></a>
                 </li>
 				<li class="nav-item">
-                  <a class="nav-link" href="">Susu/<i>Milk</i></a>
+                  <a class="nav-link" href="<?php echo base_url(); ?>admin/stok_susu">Susu/<i>Milk</i></a>
                 </li>
 				<li class="nav-item">
-                  <a class="nav-link" href="">Ikan/<i>Fish</i></a>
+                  <a class="nav-link" href="<?php echo base_url(); ?>admin/stok_ikan">Ikan/<i>Fish</i></a>
                 </li>
 				<li class="nav-item">
-                  <a class="nav-link" href="">Minyak & Lemak/<i>Oil & Fats</i></a>
+                  <a class="nav-link" href="<?php echo base_url(); ?>admin/stok_minyak">Minyak & Lemak/<i>Oil & Fats</i></a>
                 </li>
               </ul>
             </div>
           </li>
-		  <li class="nav-item <?php if($this->uri->segment(1) == "impor"){echo "active"; } ?>">
-            <a class="nav-link" data-toggle="collapse" href="#impor" aria-expanded="false" aria-controls="ui-basic">
+
+
+
+		  <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#impor" aria-expanded="false" aria-controls="impor">
               <i class="menu-icon mdi mdi-arrow-down-bold-circle"></i>
               <span class="menu-title">Impor</span> 
               <i class="menu-arrow"></i>
@@ -123,43 +133,43 @@
             <div class="collapse" id="impor">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item">
-                  <a class="nav-link" href="pages/ui-features/buttons.html">Padi-padian/<i>Cereals</i></a>
+                  <a class="nav-link" href="<?php echo base_url(); ?>admin/impor_padi">Padi-padian/<i>Cereals</i></a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="pages/ui-features/typography.html">Makanan Berpati/<i>Starchy Foods</i></a>
+                  <a class="nav-link" href="<?php echo base_url(); ?>admin/impor_berpati">Makanan Berpati/<i>Starchy Foods</i></a>
                 </li>
 				<li class="nav-item">
-                  <a class="nav-link" href="pages/ui-features/typography.html">Gula/<i>Sugar</i></a>
+                  <a class="nav-link" href="<?php echo base_url(); ?>admin/impor_gula">Gula/<i>Sugar</i></a>
                 </li>
 				<li class="nav-item">
-                  <a class="nav-link" href="pages/ui-features/typography.html">Buah Biji Berminyak/<i>Pulses Nut & Oil Seeds</i></a>
+                  <a class="nav-link" href="<?php echo base_url(); ?>admin/impor_biji">Buah Biji Berminyak/<i>Pulses Nut & Oil Seeds</i></a>
                 </li>
 				<li class="nav-item">
-                  <a class="nav-link" href="pages/ui-features/typography.html">Buah-buahan/<i>Fruits</i></a>
+                  <a class="nav-link" href="<?php echo base_url(); ?>admin/impor_buah">Buah-buahan/<i>Fruits</i></a>
                 </li>
 				<li class="nav-item">
-                  <a class="nav-link" href="pages/ui-features/typography.html">Sayur-sayuran/<i>Vegetables</i></a>
+                  <a class="nav-link" href="<?php echo base_url(); ?>admin/impor_sayur">Sayur-sayuran/<i>Vegetables</i></a>
                 </li>
 				<li class="nav-item">
-                  <a class="nav-link" href="pages/ui-features/typography.html">Daging/<i>Meat</i></a>
+                  <a class="nav-link" href="<?php echo base_url(); ?>admin/impor_daging">Daging/<i>Meat</i></a>
                 </li>
 				<li class="nav-item">
-                  <a class="nav-link" href="pages/ui-features/typography.html">Telur/<i>Eggs</i></a>
+                  <a class="nav-link" href="<?php echo base_url(); ?>admin/impor_telur">Telur/<i>Eggs</i></a>
                 </li>
 				<li class="nav-item">
-                  <a class="nav-link" href="pages/ui-features/typography.html">Susu/<i>Milk</i></a>
+                  <a class="nav-link" href="<?php echo base_url(); ?>admin/impor_susu">Susu/<i>Milk</i></a>
                 </li>
 				<li class="nav-item">
-                  <a class="nav-link" href="pages/ui-features/typography.html">Ikan/<i>Fish</i></a>
+                  <a class="nav-link" href="<?php echo base_url(); ?>admin/impor_ikan">Ikan/<i>Fish</i></a>
                 </li>
 				<li class="nav-item">
-                  <a class="nav-link" href="pages/ui-features/typography.html">Minyak & Lemak/<i>Oil & Fats</i></a>
+                  <a class="nav-link" href="<?php echo base_url(); ?>admin/impor_minyak">Minyak & Lemak/<i>Oil & Fats</i></a>
                 </li>
               </ul>
             </div>
           </li>
-		  <li class="nav-item <?php if($this->uri->segment(1) == "ekspor"){echo "active"; } ?>">
-            <a class="nav-link" data-toggle="collapse" href="#ekspor" aria-expanded="false" aria-controls="ui-basic">
+		  <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#ekspor" aria-expanded="false" aria-controls="ekspor">
               <i class="menu-icon mdi mdi-arrow-up-bold-circle"></i>
               <span class="menu-title">Ekspor</span> 
               <i class="menu-arrow"></i>
@@ -167,65 +177,102 @@
             <div class="collapse" id="ekspor">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item">
-                  <a class="nav-link" href="pages/ui-features/buttons.html">Padi-padian/<i>Cereals</i></a>
+                  <a class="nav-link" href="<?php echo base_url(); ?>admin/ekspor_padi">Padi-padian/<i>Cereals</i></a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="pages/ui-features/typography.html">Makanan Berpati/<i>Starchy Foods</i></a>
+                  <a class="nav-link" href="<?php echo base_url(); ?>admin/ekspor_berpati">Makanan Berpati/<i>Starchy Foods</i></a>
                 </li>
 				<li class="nav-item">
-                  <a class="nav-link" href="pages/ui-features/typography.html">Gula/<i>Sugar</i></a>
+                  <a class="nav-link" href="<?php echo base_url(); ?>admin/ekspor_gula">Gula/<i>Sugar</i></a>
                 </li>
 				<li class="nav-item">
-                  <a class="nav-link" href="pages/ui-features/typography.html">Buah Biji Berminyak/<i>Pulses Nut & Oil Seeds</i></a>
+                  <a class="nav-link" href="<?php echo base_url(); ?>admin/ekspor_biji">Buah Biji Berminyak/<i>Pulses Nut & Oil Seeds</i></a>
                 </li>
 				<li class="nav-item">
-                  <a class="nav-link" href="pages/ui-features/typography.html">Buah-buahan/<i>Fruits</i></a>
+                  <a class="nav-link" href="<?php echo base_url(); ?>admin/ekspor_buah">Buah-buahan/<i>Fruits</i></a>
                 </li>
 				<li class="nav-item">
-                  <a class="nav-link" href="pages/ui-features/typography.html">Sayur-sayuran/<i>Vegetables</i></a>
+                  <a class="nav-link" href="<?php echo base_url(); ?>admin/ekspor_sayur">Sayur-sayuran/<i>Vegetables</i></a>
                 </li>
 				<li class="nav-item">
-                  <a class="nav-link" href="pages/ui-features/typography.html">Daging/<i>Meat</i></a>
+                  <a class="nav-link" href="<?php echo base_url(); ?>admin/ekspor_daging">Daging/<i>Meat</i></a>
                 </li>
 				<li class="nav-item">
-                  <a class="nav-link" href="pages/ui-features/typography.html">Telur/<i>Eggs</i></a>
+                  <a class="nav-link" href="<?php echo base_url(); ?>admin/ekspor_telur">Telur/<i>Eggs</i></a>
                 </li>
 				<li class="nav-item">
-                  <a class="nav-link" href="pages/ui-features/typography.html">Susu/<i>Milk</i></a>
+                  <a class="nav-link" href="<?php echo base_url(); ?>admin/ekspor_susu">Susu/<i>Milk</i></a>
                 </li>
 				<li class="nav-item">
-                  <a class="nav-link" href="pages/ui-features/typography.html">Ikan/<i>Fish</i></a>
+                  <a class="nav-link" href="<?php echo base_url(); ?>admin/ekspor_ikan">Ikan/<i>Fish</i></a>
                 </li>
 				<li class="nav-item">
-                  <a class="nav-link" href="pages/ui-features/typography.html">Minyak & Lemak/<i>Oil & Fats</i></a>
+                  <a class="nav-link" href="<?php echo base_url(); ?>admin/ekspor_minyak">Minyak & Lemak/<i>Oil & Fats</i></a>
                 </li>
               </ul>
             </div>
           </li>
-		  		  <li class="nav-item <?php if($this->uri->segment(1) == "benih"){echo "active"; } ?>">
-            <a class="nav-link" href="<?php echo base_url(); ?>#benih">
-              <i class="menu-icon mdi mdi-leaf"></i>
-              <span class="menu-title">Benih</span>
+           <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#industrial" aria-expanded="false" aria-controls="industrial">
+              <i class="menu-icon mdi mdi-arrow-up-bold-circle"></i>
+              <span class="menu-title">Industrial</span> 
+              <i class="menu-arrow"></i>
             </a>
-          </li>
-		  <li class="nav-item <?php if($this->uri->segment(1) == "industri"){echo "active"; } ?>">
-            <a class="nav-link" href="<?php echo base_url(); ?>#industri">
-              <i class="menu-icon mdi mdi-factory"></i>
-              <span class="menu-title">Industri Makanan</span>
-            </a>
-          </li>
-		  <li class="nav-item <?php if($this->uri->segment(1) == "konsumsi"){echo "active"; } ?>">
-            <a class="nav-link" href="<?php echo base_url(); ?>#konsumsi">
-              <i class="menu-icon mdi mdi-food-fork-drink"></i>
-              <span class="menu-title">Konsumsi</span>
-            </a>
-          </li>
-		  <li class="nav-item nav-profile">
-            <div class="nav-link">
-              <button class="btn btn-success btn-block">Proses
-                <i class="mdi mdi-flask-empty"></i>
-              </button>
+            <div class="collapse" id="industrial">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item">
+                  <a class="nav-link" href="<?php echo base_url(); ?>admin/industrial_padi">Padi-padian/<i>Cereals</i></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="<?php echo base_url(); ?>admin/industrial_berpati">Makanan Berpati/<i>Starchy Foods</i></a>
+                </li>
+        <li class="nav-item">
+                  <a class="nav-link" href="<?php echo base_url(); ?>admin/industrial_gula">Gula/<i>Sugar</i></a>
+                </li>
+        <li class="nav-item">
+                  <a class="nav-link" href="<?php echo base_url(); ?>admin/industrial_biji">Buah Biji Berminyak/<i>Pulses Nut & Oil Seeds</i></a>
+                </li>
+        <li class="nav-item">
+                  <a class="nav-link" href="<?php echo base_url(); ?>admin/industrial_buah">Buah-buahan/<i>Fruits</i></a>
+                </li>
+        <li class="nav-item">
+                  <a class="nav-link" href="<?php echo base_url(); ?>admin/industrial_sayur">Sayur-sayuran/<i>Vegetables</i></a>
+                </li>
+        <li class="nav-item">
+                  <a class="nav-link" href="<?php echo base_url(); ?>admin/industrial_daging">Daging/<i>Meat</i></a>
+                </li>
+        <li class="nav-item">
+                  <a class="nav-link" href="<?php echo base_url(); ?>admin/industrial_telur">Telur/<i>Eggs</i></a>
+                </li>
+        <li class="nav-item">
+                  <a class="nav-link" href="<?php echo base_url(); ?>admin/industrial_susu">Susu/<i>Milk</i></a>
+                </li>
+        <li class="nav-item">
+                  <a class="nav-link" href="<?php echo base_url(); ?>admin/industrial_ikan">Ikan/<i>Fish</i></a>
+                </li>
+        <li class="nav-item">
+                  <a class="nav-link" href="<?php echo base_url(); ?>admin/industrial_minyak">Minyak & Lemak/<i>Oil & Fats</i></a>
+                </li>
+              </ul>
             </div>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#laporan" aria-expanded="false" aria-controls="laporan">
+              <i class="menu-icon mdi mdi-file-document"></i>
+              <span class="menu-title">Laporan</span> 
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="laporan">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item">
+                  <a class="nav-link" href="<?php echo base_url(); ?>admin/laporan_nbm">NBM</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="<?php echo base_url(); ?>admin/laporan_pph">PPH</a>
+                </li>
+              </ul>
+            </div>
+          </li>
+		  
         </ul>
       </nav>

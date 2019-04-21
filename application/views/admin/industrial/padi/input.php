@@ -1,11 +1,11 @@
 <div class="col-12 grid-margin">
               <div class="card">
                 <div class="card-body">
-                  <h3>Stok</h3>
+                  <h3>Industrial Use</h3>
                   <h4>
                       Jenis Bahan Makanan Padi
                   </h4>
-                   <?php echo form_open(base_url().'admin/padi_post_stok','class="form-horizontal form-data"', array("id" => "form-data"));?>
+                   <?php echo form_open(base_url().'admin/padi_post_industrial','class="form-horizontal form-data"', array("id" => "form-data"));?>
                    <div class="row">
                      <div class="col-md-4">
                        <div class="form-group mt-3">
@@ -46,8 +46,7 @@
                     <tr>
                       <th width="1%">No</th>
                       <th>Nama Bahan Makanan</th>
-                      <th>Stok Awal</th>
-                      <th>Stok Akhir</th>
+                      <th>Penggunaan Industrial<br>(Ton)</th>
                       <th>Extraction Rate</th>
                    </tr>
                   </thead>
@@ -68,23 +67,12 @@
                         <div class="form-group row">
                           <div class="col-sm-12">
 
-                            <input type="text" id="stok_awal[]" name="stok_awal[]" class="form-control" />
+                            <input type="text" id="angka_industrial[]" name="angka_industrial[]" class="form-control" />
                           </div>
                         </div>
                       </div>
                     </div>
                     </td>
-                    <td width="25%">
-                      <div class="row">
-                      <div class="col-md-12">
-                        <div class="form-group row">
-                          <div class="col-sm-12">
-                            <input type="text" id="stok_akhir[]" name="stok_akhir[]" class="form-control" />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </td>
                   <td width="25%">
                       <div class="row">
                       <div class="col-md-12">

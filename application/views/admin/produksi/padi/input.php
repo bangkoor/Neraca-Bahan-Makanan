@@ -90,7 +90,7 @@
                       <div class="col-md-12">
                         <div class="form-group row">
                           <div class="col-sm-12">
-                            <input type="text" id="konversi[]" name="konversi[]" class="form-control" />
+                            <input type="text" id="konversi[]" name="konversi[]" value="<?= $f->nilai_koversi; ?>" class="form-control" />
                           </div>
                         </div>
                       </div>

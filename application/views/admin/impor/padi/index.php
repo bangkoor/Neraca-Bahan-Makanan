@@ -2,6 +2,9 @@
               <div class="card">
                 <div class="card-body">
                   <h3>Stok</h3>
+                  <?php $data = $fields->result();
+                  echo $data[1]->nama_komoditas;
+                   ?>
                   <h4>
                       Jenis Bahan Makanan <?php echo ucfirst($this->uri->segment(2)); ?>
                   </h4>
@@ -17,8 +20,8 @@
                       <th>No</th>
                       <th>Bahan Makanan</th>
                       <th>Angka Impor</th>
-                      <th>Konversi</th>
-                      <th>Produksi Bersih</th>
+                      <th>Extraction Rate</th>
+                      <th>Primary Commodity Equivalet<br>(000 Ton)</th>
                       <th>Tahun</th>
                       <th>Quartal</th>
                       <th>Status</th>
